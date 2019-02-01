@@ -1,0 +1,416 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sumo-",
+				"sumo-gui"
+			],
+			[
+				"chris",
+				"christof"
+			],
+			[
+				"find",
+				"findDialogue"
+			],
+			[
+				"put",
+				"putStrLn"
+			],
+			[
+				"remove",
+				"removeAll"
+			],
+			[
+				"depo",
+				"depositAtLocation"
+			],
+			[
+				"putStr",
+				"putStrLn"
+			],
+			[
+				"putS",
+				"putStrLn"
+			],
+			[
+				"do",
+				"do"
+			],
+			[
+				"a",
+				"a"
+			],
+			[
+				"same",
+				"sameCheck"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "from sumolib import checkBinary\nsumoBinary = checkBinary(\"sumo-gui\")\n\nsumoCmd = [sumoBinary, \"-c\", \"CoordIntersection.sumocfg\"]\n\nimport traci\n\ntraci.start(sumoCmd)\n\nstep = 0\nwhile step < 1000:\n\tidList = traci.vehicle.getIDList()\n\tfor vehicle in idList:\n\t\tprint(vehicle.)\n   \ttraci.simulationStep()\n   \tstep += 1\n\n\ntraci.close()\n",
+			"file": "launch.py",
+			"file_size": 346,
+			"file_write_time": 131928935893766830,
+			"settings":
+			{
+				"buffer_size": 328,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				"Syntax Check"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Packagere",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"insall",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"packag",
+				"Package Control: Install Package"
+			],
+			[
+				"package control",
+				"Package Control: Install Package"
+			],
+			[
+				"adda",
+				"Package Control: Add Channel"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 190.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Sam/AppData/Roaming/Sublime Text 3/Packages/Python/Completion Rules.tmPreferences",
+		"/C/Users/Sam/AppData/Roaming/Sublime Text 3/Packages/Jedi - Python autocompletion/sublime_jedi.sublime-settings",
+		"/C/Users/Sam/OneDrive/_University/Year 4/Individual Project/SUMO/NormalIntersection/NormalIntersection.rou.xml",
+		"/C/Users/Sam/OneDrive/_University/Year 4/Individual Project/SUMO/Co-ordinatedIntersection/launch.py",
+		"/C/Users/Sam/OneDrive/_University/Year 4/Individual Project/SUMO/Co-ordinatedIntersection/CoordIntersection.sumocfg",
+		"/C/Users/Sam/OneDrive/_University/Year 4/Individual Project/SUMO/NormalIntersection/launch.py",
+		"/D/My Applications/Battle.net/Call of Duty Black Ops 4/players/config.ini",
+		"/C/Users/Sam/OneDrive/_University/Year 4/Individual Project/SUMO/NormalIntersection/NormalIntersection.sumocfg",
+		"/C/Users/Sam/OneDrive/_University/Year 4/Individual Project/SUMO/NormalIntersection/highway_merge.rou.xml",
+		"/C/Users/Sam/SUMO/NormalIntersection/NormalIntersection.net.xml",
+		"/C/Users/Sam/src/bsf/virtual_agent/Jason/src/asl/kqmlPlans.asl",
+		"/C/Users/Sam/src/bsf/virtual_agent/nJason/asl/nta.asl",
+		"/C/Users/Sam/src/bsf/virtual_agent/mind/asl/member_npc.asl",
+		"/C/Users/Sam/src/bsf/virtual_agent/Jason/demos/create-agent/ag1.asl",
+		"/C/Users/Sam/src/bsf/virtual_agent/Jason/demos/distributed-jade/case2/a.asl",
+		"/C/Users/Sam/src/bsf/sumoVehicles/src/edu/bath/sumoVehicles/SumoXMPPSim.java",
+		"/C/Users/Sam/src/bsf/virtual_agent/Jason/build.xml",
+		"/C/Users/Sam/SUMO/2019-01-17-22-23-25/osm.passenger.rou.alt.xml",
+		"/C/Users/Sam/src/bsf/sumoVehicles/src/edu/bath/sumoVehicles/AllSpeeds.java",
+		"/C/Users/Sam/src/bsf/sumoVehicles/src/edu/bath/sumoVehicles/StopPositionPair.java",
+		"/C/Users/Sam/src/bsf/sumoVehicles/src/edu/bath/sumoVehicles/VehicleLane.java",
+		"/C/Users/Sam/src/bsf/convoyScenario/build.xml",
+		"/C/Users/Sam/src/bsf/build.xml",
+		"/C/Users/Sam/src/bsf/convoyScenario/asl/convoyMember.asl",
+		"/C/Users/Sam/src/bsf/convoyScenario/asl/centralMember6.asl",
+		"/C/Users/Sam/AppData/Roaming/RabbitMQ/log/rabbit@Sam-Portable-PC.log",
+		"/C/Users/Sam/AppData/Roaming/RabbitMQ/advanced.config",
+		"/C/Users/Sam/AppData/Roaming/RabbitMQ/rabbitmq.conf",
+		"/C/Users/Sam/Desktop/test.py",
+		"/C/Users/Sam/src/bsf/testharness/src/edu/bath/test/Test.java",
+		"/C/Users/Sam/SUMO/tools/simpla/template.cfg.xml",
+		"/C/Users/Sam/OneDrive/_University/Year 4/Individual Project/SUMO/Highway Merge Platoons/simpla.cfg.xml",
+		"/C/Users/Sam/OneDrive/_University/Year 4/Individual Project/SUMO/Highway Merge Platoons/highway_merge.rou.xml",
+		"/C/Users/Sam/OneDrive/_University/Year 4/Individual Project/SUMO/Highway Merge Platoons/highway_merge.net.xml",
+		"/C/Users/Sam/OneDrive/_University/Year 4/Individual Project/SUMO/Highway Merge Platoons/launch.py",
+		"/C/Users/Sam/OneDrive/_University/Year 4/Individual Project/SUMO/Highway Merge/launch.py",
+		"/C/Program Files (x86)/Eclipse/Sumo/doc/tutorial/traci_tls/runner.py",
+		"/C/Users/Sam/src/bsf/convoyScenario/java/loadBathRoute.java",
+		"/C/Users/Sam/src/bsf/pythonFramework/BSFLight.py",
+		"/C/Users/Sam/src/bsf/pythonFramework/BSF.py",
+		"/C/Users/Sam/Desktop/Highway_Merge/launch.py",
+		"/C/Users/Sam/Desktop/Highway Merge/launch.py",
+		"/C/Program Files (x86)/Eclipse/Sumo/tools/traci/__init__.py",
+		"/C/Users/Sam/AppData/Local/Programs/Python/Python35-32/lib/subprocess.py",
+		"/C/Users/Sam/OneDrive/_University/Year 4/Individual Project/SUMO/Highway Merge/traci.py",
+		"/C/Users/Sam/src/sumo-0.32.0/doc/tutorial/traci_tls/runner.py",
+		"/C/Users/Sam/Desktop/helloworld.py",
+		"/C/Users/Sam/Sumo/test/traci.py",
+		"/C/Users/Sam/src/sumo-0.32.0/doc/tutorial/traci_tls/embedded.py",
+		"/C/Users/Sam/Sumo/test/highway_merge.sumocfg",
+		"/C/Users/Sam/Sumo/test/mergegui.settings.xml",
+		"/C/Users/Sam/Sumo/test/highway_merge.rou.xml",
+		"/C/Users/Sam/ownCloud/H Drive - Home/test_files/ASP/timetable.lp",
+		"/C/Users/Sam/Desktop/timetableData.lp",
+		"/C/Users/Sam/ownCloud/H Drive - Home/test_files/ASP/data.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/examples/hanoi/hanoi.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/constraints/3-negation.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/rules/5-notunbound.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/rules/3-compoundrules.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/rules/2-multiplerules.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/constraints/exercises/ex4.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/constraints/4-underscores.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/constraints/2-multipleconstraints.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/atoms/1-basic.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/Coursework/data.lp",
+		"/C/Users/Sam/Desktop/timetable.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/Coursework/timetable.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/generate/5-internal.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/generate/2-tasktime.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/Coursework/timetable.asa",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/Coursework/data.asa",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Functional Programming/Coursework 1/coursework_1.hs",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Functional Programming/Labs/tutorial_3.hs",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/rules/1-basic.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/constraints/1-basic.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Artificial Intelligence/AI-ASP-public/generate/1-basic.lp",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Functional Programming/Labs/tutorial_5.hs",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Functional Programming/Labs/tutorial_4.hs",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Functional Programming/Labs/tutorial_2.hs",
+		"/C/Users/Sam/OneDrive/_University/Year 2/Functional Programming/Labs/tutorial_1.hs",
+		"/C/Users/Sam/Desktop/coursework_1.hs"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"128",
+			"id",
+			") ",
+			"game",
+			"contents",
+			"loop",
+			"game",
+			"accessible",
+			"numbers",
+			"putStrln",
+			"g",
+			"snd",
+			"Tree a a",
+			"Tree",
+			"IntTree",
+			"x <- xs",
+			"x <- x",
+			" | x <- xs",
+			"[x | x <- xs",
+			"xs",
+			"oddCheck",
+			"length",
+			"oddCheck"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"Tree a",
+			"Tree"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "launch.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 328,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								128,
+								128
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"show_definitions": false,
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 283.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "CoordinatedIntersection.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 188.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
