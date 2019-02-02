@@ -18,7 +18,8 @@ class Platoon():
         # Adds a single vehicle to this platoon
         self._vehicles.add(vehicle)
         self.startPlatoonBehaviour()
-        logging.info("Adding %s to platoon %s, New length: %s", vehicle, self.getPlatoonID(), len(self._vehicles))
+        logging.info("Adding %s to platoon %s, New length: %s",
+                     vehicle, self.getPlatoonID(), len(self._vehicles))
 
     def disbandPlatoon(self):
         # Marks a platoon as dead and returns vehicles to normal
@@ -42,6 +43,7 @@ class Platoon():
         # out of a given list of vehicles
         if self._active:
             for vehicle in self._vehicles:
+                traci.vehicle.setColor(vehicle, (255, 0, 0))
                 traci.vehicle.setTau(vehicle, 0)
                 traci.vehicle.setSpeedFactor(vehicle, 1)
                 traci.vehicle.setMinGap(vehicle, 0)
@@ -53,6 +55,7 @@ class Platoon():
         vehicleList = traci.vehicle.getIDList()
         for vehicle in self._vehicles:
             if vehicle in vehicleList:
+                traci.vehicle.setColor(vehicle, (255, 255, 255))
                 traci.vehicle.setTau(vehicle, 1)
                 traci.vehicle.setSpeedFactor(vehicle, 0.9)
                 traci.vehicle.setMinGap(vehicle, 2.5)
@@ -61,6 +64,8 @@ class Platoon():
     def updatePlatoon(self):
         # Performs updates to maintain the platoon
         # 1. set platoon location information using lead vehicle
+        # 2. set the speed of all vehicles in the convoy,
+        #    using the lead vehicle's current speed
         # 2. is this platoon still alive (in the map),
         #    should it be labelled as inactive?
 
@@ -69,10 +74,17 @@ class Platoon():
 
         self._lane = traci.vehicle.getLaneID(
             self._leadVehicle) if leadInMap else None
-
         self._lanePosition = traci.vehicle.getLanePosition(
             self._leadVehicle) if leadInMap else None
+
+        if leadInMap:
+            self.updatePlatoonSpeed(traci.vehicle.getSpeed(self._leadVehicle))
 
         if all([v not in vehicleList for v in self._vehicles]):
             logging.info("Setting platoon %s as inactive", self.getPlatoonID())
             self._active = False
+
+    def updatePlatoonSpeed(self, speed):
+        nonLeadingVehicles = self._vehicles - set([self._leadVehicle])
+        for veh in nonLeadingVehicles:
+            traci.vehicle.setSpeed(veh, speed)
