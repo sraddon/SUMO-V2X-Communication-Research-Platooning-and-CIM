@@ -2,6 +2,17 @@ import logging
 import traci
 
 
+class Route():
+
+    def __init__(self, vehicle):
+        self.vehicle = vehicle
+        self.route = traci.vehicle.getRoute(vehicle)
+        self.destination = self.route[-1]
+
+    def getRemainingRoute(self):
+        return self.route[traci.vehicle.getRouteIndex(self.vehicle):]
+
+
 class Platoon():
 
     def __init__(self, startingVehicles):
@@ -12,12 +23,15 @@ class Platoon():
         self._lane = traci.vehicle.getLaneID(self._leadVehicle)
         self._lanePosition = traci.vehicle.getLanePosition(self._leadVehicle)
         self._vehicles = set(startingVehicles)
+        self._routes = [Route(v) for v in startingVehicles]
+        self._platoonCutOff = None
         self.startPlatoonBehaviour()
 
     def addVehicleToPlatoon(self, vehicle):
         # Adds a single vehicle to this platoon
         self._vehicles.add(vehicle)
         self.startPlatoonBehaviour()
+        self._routes.append(Route(vehicle))
         logging.info("Adding %s to platoon %s, New length: %s",
                      vehicle, self.getPlatoonID(), len(self._vehicles))
 
@@ -66,9 +80,10 @@ class Platoon():
         # 1. set platoon location information using lead vehicle
         # 2. set the speed of all vehicles in the convoy,
         #    using the lead vehicle's current speed
-        # 2. is this platoon still alive (in the map),
+        # 3. is this platoon still alive (in the map),
         #    should it be labelled as inactive?
 
+        # Location Info Update
         vehicleList = traci.vehicle.getIDList()
         leadInMap = self._leadVehicle in vehicleList
 
@@ -78,8 +93,20 @@ class Platoon():
             self._leadVehicle) if leadInMap else None
 
         if leadInMap:
+            # Speed Update
             self.updatePlatoonSpeed(traci.vehicle.getSpeed(self._leadVehicle))
 
+            # Route updates
+            for vehicle in self._vehicles:
+                leadVehicleRoute = self._routes[0].getRemainingRoute()
+                if len(leadVehicleRoute) > 1:
+                    leadVehicleNextEdge = leadVehicleRoute[1]
+                else:
+                    break
+                if leadVehicleNextEdge not in traci.vehicle.getRoute(vehicle):
+                    self.disbandPlatoon()
+
+        # Is Active Update
         if all([v not in vehicleList for v in self._vehicles]):
             logging.info("Setting platoon %s as inactive", self.getPlatoonID())
             self._active = False
@@ -87,4 +114,4 @@ class Platoon():
     def updatePlatoonSpeed(self, speed):
         nonLeadingVehicles = self._vehicles - set([self._leadVehicle])
         for veh in nonLeadingVehicles:
-            traci.vehicle.setSpeed(veh, speed)
+            traci.vehicle.setSpeed(veh, speed if speed == 0 else speed + 10)
