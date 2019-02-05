@@ -1,5 +1,6 @@
 import logging
 import traci
+import random
 
 
 class Route():
@@ -25,6 +26,7 @@ class Platoon():
         self._vehicles = set(startingVehicles)
         self._routes = [Route(v) for v in startingVehicles]
         self._platoonCutOff = None
+        self._color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
         self.startPlatoonBehaviour()
 
     def addVehicleToPlatoon(self, vehicle):
@@ -57,7 +59,7 @@ class Platoon():
         # out of a given list of vehicles
         if self._active:
             for vehicle in self._vehicles:
-                traci.vehicle.setColor(vehicle, (255, 0, 0))
+                traci.vehicle.setColor(vehicle, self._color)
                 traci.vehicle.setTau(vehicle, 0)
                 traci.vehicle.setSpeedFactor(vehicle, 1)
                 traci.vehicle.setMinGap(vehicle, 0)
@@ -97,6 +99,8 @@ class Platoon():
             self.updatePlatoonSpeed(traci.vehicle.getSpeed(self._leadVehicle))
 
             # Route updates
+            # Check that all cars still want to continue onto the
+            # next edge, otherwise disband the platoon
             for vehicle in self._vehicles:
                 leadVehicleRoute = self._routes[0].getRemainingRoute()
                 if len(leadVehicleRoute) > 1:
