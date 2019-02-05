@@ -38,7 +38,7 @@ class SimulationManager():
         # vehicle by looking to see if the car in front is part of a platoon
         # It also checks that the platoon is heading in the right direction
 
-        leadVeh = traci.vehicle.getLeader(vehicle, 100)
+        leadVeh = traci.vehicle.getLeader(vehicle, 20)
         if leadVeh:
             possiblePlatoon = self.getPlatoonByVehicle(leadVeh[0])
             assert(len(possiblePlatoon) <= 1,

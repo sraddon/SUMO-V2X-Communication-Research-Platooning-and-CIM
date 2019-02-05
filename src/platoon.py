@@ -111,29 +111,25 @@ class Platoon():
         3. is this platoon still alive (in the map),
            should it be labelled as inactive?"""
 
-        # Location Info Update
         vehicleList = traci.vehicle.getIDList()
-        leadInMap = self._leadVehicle in vehicleList
-
-        self._lane = traci.vehicle.getLaneID(
-            self._leadVehicle) if leadInMap else None
-        self._lanePosition = traci.vehicle.getLanePosition(
-            self._leadVehicle) if leadInMap else None
-
-        if leadInMap:
-            # Speed Update
-            self.updatePlatoonSpeed(
-                traci.vehicle.getSpeed(self._leadVehicle), False)
-
-            # Route updates
-            # Check that all cars still want to continue onto the
-            # next edge, otherwise disband the platoon
-            routeok = self.checkVehiclePathsConverge(self.getAllVehicles())
-            if not routeok:
-                self.disbandPlatoon()
-
-        # Is Active Update
+        # Is Active Update, if not disband and end update function
         if any([v not in vehicleList for v in self._vehicles]):
+            self.disbandPlatoon()
+            return None
+
+        # Location Info Update
+        self._lane = traci.vehicle.getLaneID(self._leadVehicle)
+        self._lanePosition = traci.vehicle.getLanePosition(self._leadVehicle)
+
+        # Speed Update
+        self.updatePlatoonSpeed(
+            traci.vehicle.getSpeed(self._leadVehicle), False)
+
+        # Route updates
+        # Check that all cars still want to continue onto the
+        # next edge, otherwise disband the platoon
+        routeok = self.checkVehiclePathsConverge(self.getAllVehicles())
+        if not routeok:
             self.disbandPlatoon()
 
     def updatePlatoonSpeed(self, speed, inclLeadingVeh=True):
@@ -148,6 +144,10 @@ class Platoon():
         else:
             vehicles = self.getAllVehicles()
         for veh in vehicles:
-            leadVeh = traci.vehicle.getLeader(veh, 100)
+            # If we're in range of the leader follow thier speed
+            # Otherwise follow vehicle speed limit rules to catch up
+            leadVeh = traci.vehicle.getLeader(veh, 20)
             if leadVeh and leadVeh[1] <= 10:
                 traci.vehicle.setSpeed(veh, speed)
+            else:
+                traci.vehicle.setSpeed(veh, -1)
