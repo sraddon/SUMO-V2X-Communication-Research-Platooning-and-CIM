@@ -3,17 +3,6 @@ import traci
 import random
 
 
-class Route():
-
-    def __init__(self, vehicle):
-        self.vehicle = vehicle
-        self.route = traci.vehicle.getRoute(vehicle)
-        self.destination = self.route[-1]
-
-    def getRemainingRoute(self):
-        return self.route[traci.vehicle.getRouteIndex(self.vehicle):]
-
-
 class Platoon():
 
     def __init__(self, startingVehicles):
@@ -24,7 +13,6 @@ class Platoon():
         self._lane = traci.vehicle.getLaneID(self._leadVehicle)
         self._lanePosition = traci.vehicle.getLanePosition(self._leadVehicle)
         self._vehicles = set(startingVehicles)
-        self._routes = [Route(v) for v in startingVehicles]
         self._platoonCutOff = None
         self._color = (random.randint(0, 255), random.randint(
             0, 255), random.randint(0, 255))
@@ -34,7 +22,6 @@ class Platoon():
         """Adds a single vehicle to this platoon"""
         self._vehicles.add(vehicle)
         self.startPlatoonBehaviour([vehicle, ])
-        self._routes.append(Route(vehicle))
         logging.info("Adding %s to platoon %s, New length: %s",
                      vehicle, self.getPlatoonID(), len(self._vehicles))
 
@@ -51,6 +38,10 @@ class Platoon():
     def getPlatoonID(self):
         """Generates and returns a unique ID for this platoon"""
         return "%s" % (self._leadVehicle)
+
+    def getRemainingRouteOfVehicle(self, vehicle):
+        vehicleRoute = traci.vehicle.getRoute(vehicle)
+        return vehicleRoute[traci.vehicle.getRouteIndex(self.vehicle):]
 
     def isActive(self):
         """Is the platoon currently active within the scenario"""
@@ -95,7 +86,7 @@ class Platoon():
     def checkVehiclePathsConverge(self, vehicles):
         # Check that the given vehicles are going to follow the lead
         # vehicle into the next edge
-        leadVehicleRoute = self._routes[0].getRemainingRoute()
+        leadVehicleRoute = self.getRemainingRouteOfVehicle(self._leadVehicle)
         if len(leadVehicleRoute) > 1:
             leadVehicleNextEdge = leadVehicleRoute[1]
             for vehicle in vehicles:
