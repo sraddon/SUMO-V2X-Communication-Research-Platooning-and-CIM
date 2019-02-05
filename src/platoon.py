@@ -41,7 +41,7 @@ class Platoon():
 
     def getRemainingRouteOfVehicle(self, vehicle):
         vehicleRoute = traci.vehicle.getRoute(vehicle)
-        return vehicleRoute[traci.vehicle.getRouteIndex(self.vehicle):]
+        return vehicleRoute[traci.vehicle.getRouteIndex(vehicle):]
 
     def isActive(self):
         """Is the platoon currently active within the scenario"""
