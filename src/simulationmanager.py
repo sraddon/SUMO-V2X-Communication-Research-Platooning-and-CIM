@@ -30,33 +30,22 @@ class SimulationManager():
         # Gets platoons corresponding to a given lane
         return [p for p in self.getActivePlatoons() if lane == p._lane]
 
+    def getPlatoonByVehicle(self, v):
+        return [p for p in self.getActivePlatoons() if v in p.getAllVehicles()]
+
     def getReleventPlatoon(self, vehicle):
         # Returns a single platoon that is most relevent to the given
-        # vehicle
-        # 1. Is there a platoon in the current lane?
-        # 2. Which one is the closest in front?
-        # None will be returned if no platoon is found that is relevent
-        #
-        # TODO: Make is so that a platoon is only relevent if it
-        # is directly in front of the vehicle
+        # vehicle by looking to see if the car in front is part of a platoon
+        # It also checks that the platoon is heading in the right direction
 
-        def posSort(val):
-            # Sorting key function sort platoons by position in the lane
-            return val._lanePosition
-
-        lane = traci.vehicle.getLaneID(vehicle)
-        lanePosition = traci.vehicle.getLanePosition(vehicle)
-        possiblePlatoons = self.getPlatoonByLane(lane)
-        if len(possiblePlatoons) == 1:
-            return possiblePlatoons[0]
-        else:
-            possiblePlatoons.sort(key=posSort)
-            currBestPlatoon = None
-            for p in possiblePlatoons:
-                if p._lanePosition > lanePosition:
-                    break
-                currBestPlatoon = p
-        return currBestPlatoon
+        leadVeh = traci.vehicle.getLeader(vehicle, 100)
+        if leadVeh:
+            possiblePlatoon = self.getPlatoonByVehicle(leadVeh[0])
+            assert(len(possiblePlatoon) <= 1,
+                   "Only 1 platoon should be returned")
+            if possiblePlatoon:
+                if possiblePlatoon[0].checkVehiclePathsConverge([vehicle]):
+                    return possiblePlatoon[0]
 
     def handleSimulationStep(self):
         # Handles a single step of the simulation
@@ -66,12 +55,13 @@ class SimulationManager():
 
         # See whether there are any vehicles that are not
         # in a platoon that should be in one
-        vehiclesNotInPlatoons = [v for v in traci.vehicle.getIDList() if v not in self.getAllVehiclesInPlatoons()]
+        vehiclesNotInPlatoons = [v for v in traci.vehicle.getIDList(
+        ) if v not in self.getAllVehiclesInPlatoons()]
+
         for vehicleID in vehiclesNotInPlatoons:
-            vehicleSpeed = traci.vehicle.getSpeed(vehicleID)
             vehicleLane = traci.vehicle.getLaneID(vehicleID)
             # If we're not in a starting segment (speed starts as 0)
-            if self.laneNodeConnections[vehicleLane] > 1 and vehicleSpeed == 0:
+            if self.laneNodeConnections[vehicleLane] > 1:
                 possiblePlatoon = self.getReleventPlatoon(vehicleID)
                 if possiblePlatoon:
                     possiblePlatoon.addVehicleToPlatoon(vehicleID)
