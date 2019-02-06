@@ -80,7 +80,6 @@ class Platoon():
                 traci.vehicle.setColor(vehicle, (255, 255, 255))
                 traci.vehicle.setTau(vehicle, 1)
                 traci.vehicle.setSpeedFactor(vehicle, 0.9)
-                traci.vehicle.setMinGap(vehicle, 2.5)
                 traci.vehicle.setImperfection(vehicle, 0.5)
 
     def checkVehiclePathsConverge(self, vehicles):
@@ -135,10 +134,12 @@ class Platoon():
         else:
             vehicles = self.getAllVehicles()
         for veh in vehicles:
-            # If we're in range of the leader follow thier speed
+            # If we're in range of the leader and they are moving
+            # follow thier speed
             # Otherwise follow vehicle speed limit rules to catch up
             leadVeh = traci.vehicle.getLeader(veh, 20)
-            if leadVeh and leadVeh[1] <= 10:
+            platoonleadSpeed = traci.vehicle.getSpeed(self._leadVehicle)
+            if leadVeh and leadVeh[1] <= 10 and platoonleadSpeed != 0:
                 traci.vehicle.setSpeed(veh, speed)
             else:
                 traci.vehicle.setSpeed(veh, -1)
