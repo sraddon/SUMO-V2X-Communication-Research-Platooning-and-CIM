@@ -17,7 +17,7 @@ root.setLevel(logging.DEBUG)
 
 # Start Simulation and step through
 traci.start([sumoBinary, "-c", "CoordIntersection.sumocfg",
-             "--step-length", "0.1"])
+             "--step-length", "0.1", "--collision.action", "none"])
 step = 0
 manager = SimulationManager()
 while step < 5000:
