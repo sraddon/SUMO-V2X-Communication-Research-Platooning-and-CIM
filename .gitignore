@@ -1,6 +1,8 @@
 
 *.pyc
-src/__pycache__/simulationmanager.cpython-35.pyc
-src/__pycache__/platoon.cpython-35.pyc
-src/__pycache__/platoon.cpython-35.pyc
-src/__pycache__/simulationmanager.cpython-35.pyc
+.vs/slnx.sqlite
+.vs/SUMOIntersectionResearch/v15/.suo
+.vs/VSWorkspaceState.json
+SUMOIntersectionResearch.pyproj
+SUMOIntersectionResearch.pyproj.user
+SUMOIntersectionResearch.sln
