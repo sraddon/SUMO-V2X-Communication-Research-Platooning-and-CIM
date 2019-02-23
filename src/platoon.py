@@ -111,7 +111,7 @@ class Platoon():
 
     def mergePlatoon(self, platoon):
         """Merges the given platoon into the current platoon"""
-        if self.checkVehiclePathsConverge(platoon.getAllVehicles()):
+        if self.checkVehiclePathsConverge(platoon.getAllVehicles()) and platoon.getLane() == self.getLane():
             platoon.disband()
             for vehicle in platoon.getAllVehicles():
                 self.addVehicle(vehicle)

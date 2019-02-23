@@ -73,12 +73,11 @@ class SimulationManager():
             for vehicleID in vehiclesNotInPlatoons:
                 vehicleLane = traci.vehicle.getLaneID(vehicleID)
                 # If we're not in a starting segment (speed starts as 0)
-                if "in" not in vehicleLane:
-                    possiblePlatoon = self.getReleventPlatoon(vehicleID)
-                    if possiblePlatoon:
-                        possiblePlatoon.addVehicle(vehicleID)
-                    else:
-                        self.createPlatoon([vehicleID, ])
+                possiblePlatoon = self.getReleventPlatoon(vehicleID)
+                if possiblePlatoon:
+                    possiblePlatoon.addVehicle(vehicleID)
+                else:
+                    self.createPlatoon([vehicleID, ])
 
         if self.intersections:
             for inControl in self.intersections:
