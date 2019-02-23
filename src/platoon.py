@@ -12,11 +12,12 @@ class Platoon():
         self._color = (random.randint(0, 255), random.randint(
             0, 255), random.randint(0, 255))
         self._leadVehicle = startingVehicles[0]  # must be better than this
+        self._acceleration = traci.vehicle.getAcceleration(self._leadVehicle)
+        self._currentSpeed = traci.vehicle.getSpeed(self._leadVehicle)
         self._lane = traci.vehicle.getLaneID(self._leadVehicle)
         self._lanePosition = traci.vehicle.getLanePosition(self._leadVehicle)
-        self._platoonCutOff = None
-        self._scheduled = False
         self._maxSpeed = traci.vehicle.getMaxSpeed(self._leadVehicle)
+        self._targetSpeed = -1
         self._vehicles = list(startingVehicles)
         self.startBehaviour(startingVehicles)
 
@@ -24,9 +25,12 @@ class Platoon():
         """Adds a single vehicle to this platoon"""
         self._vehicles.append(vehicle)
         self.startBehaviour([vehicle, ])
+        acceleration = traci.vehicle.getAcceleration(vehicle)
         maxSpeed = traci.vehicle.getMaxSpeed(vehicle)
         if maxSpeed < self._maxSpeed:
             self._maxSpeed = maxSpeed
+        if acceleration < self._acceleration:
+            self._acceleration = acceleration
         logging.info("Adding %s to platoon %s, New length: %s",
                      vehicle, self.getID(), len(self._vehicles))
 
@@ -47,9 +51,15 @@ class Platoon():
         self._active = False
         logging.info("Disbanding platoon: %s", self.getID())
 
+    def getAcceleration(self):
+        return self._acceleration
+
     def getAllVehicles(self):
         """Retrieve the list of all the vehicles in this platoon"""
         return self._vehicles
+
+    def getCurrentSpeed(self):
+        return self._currentSpeed
 
     def getID(self):
         """Generates and returns a unique ID for this platoon"""
@@ -57,6 +67,9 @@ class Platoon():
 
     def getLane(self):
         return self._lane
+
+    def getLanesOfAllVehicles(self):
+        return [traci.vehicle.getLaneID(v) for v in self.getAllVehicles()]
 
     def getLanePosition(self):
         return traci.lane.getLength(self._lane) - self._lanePosition
@@ -67,19 +80,26 @@ class Platoon():
             bumper and the end of the lane
             TODO: deal with vehicles being in different lanes
         """
-        frontVehicle = traci.lane.getLength(self._lane) - traci.vehicle.getLanePosition(self._leadVehicle)
-        rearVehicle = traci.lane.getLength(self._lane) - traci.vehicle.getLanePosition(self._vehicles[-1])
+        laneLen = traci.lane.getLength(self._lane)
+        front = laneLen - traci.vehicle.getLanePosition(self._leadVehicle)
+        rear = laneLen - traci.vehicle.getLanePosition(self._vehicles[-1])
         rearVehicleLength = traci.vehicle.getLength(self._vehicles[-1])
-        return rearVehicle - frontVehicle + rearVehicleLength
+        return rear - front + rearVehicleLength + 2
 
     def getMaxSpeed(self):
         """ Gets the maximum speed of the platoon
         """
         return traci.vehicle.getMaxSpeed(self._leadVehicle)
 
+    def getNumberOfVehicles(self):
+        return len(self._vehicles)
+
     def getRemainingRouteOfVehicle(self, vehicle):
         vehicleRoute = traci.vehicle.getRoute(vehicle)
         return vehicleRoute[traci.vehicle.getRouteIndex(vehicle):]
+
+    def getTargetSpeed(self):
+        return self._targetSpeed
 
     def isActive(self):
         """Is the platoon currently active within the scenario"""
@@ -97,8 +117,14 @@ class Platoon():
                           platoon.getID(), self.getID())
             return False
 
-    def setSpeed(self, speed):
-        traci.vehicle.setSpeed(self._leadVehicle, speed)
+    def removeTargetSpeed(self):
+        """
+        Removes the target speed from this platoon
+        """
+        self._targetSpeed = -1
+
+    def setTargetSpeed(self, speed):
+        self._targetSpeed = speed
 
     def startBehaviour(self, vehicles):
         """A function to start platooning a specific set of vehicles"""
@@ -138,15 +164,17 @@ class Platoon():
             return None
 
         # Location Info Update
-        newLane = traci.vehicle.getLaneID(self._leadVehicle)
-        if newLane != self._lane:
-            self.setSpeed(-1)
-            self._scheduled = False
-        self._lane = newLane
+        self._lane = traci.vehicle.getLaneID(self._leadVehicle)
         self._lanePosition = traci.vehicle.getLanePosition(self._leadVehicle)
 
         # Speed Update
-        self._updateSpeed(traci.vehicle.getSpeed(self._leadVehicle), False)
+        # TODO: set max speed to that of the platoon if different
+        self._currentSpeed = traci.vehicle.getSpeed(self._leadVehicle)
+        if self._targetSpeed != -1:
+            self._updateSpeed(self._targetSpeed)
+        else:
+            traci.vehicle.setSpeed(self._leadVehicle, -1)
+            self._updateSpeed(self._currentSpeed, False)
 
         # Route updates
         # Check that all cars still want to continue onto the
@@ -160,19 +188,18 @@ class Platoon():
             excluded from the speed change.
             Also checks that the platoon is bunched together, this allows
             for vehicles to "catch-up"
-            TODO: allow for the persisting of speed
         """
-        if not inclLeadingVeh:
-            vehicles = self._vehicles[1:]
-        else:
-            vehicles = self.getAllVehicles()
+        if inclLeadingVeh:
+            traci.vehicle.setSpeed(self._leadVehicle, speed)
+
+        # Non leading vehicles should follow the speed of the vehicle in front
+        vehicles = self._vehicles[1:]
         for veh in vehicles:
             # If we're in range of the leader and they are moving
             # follow thier speed
             # Otherwise follow vehicle speed limit rules to catch up
             leadVeh = traci.vehicle.getLeader(veh, 20)
-            platoonleadSpeed = traci.vehicle.getSpeed(self._leadVehicle)
-            if leadVeh and leadVeh[1] <= 10 and platoonleadSpeed != 0:
+            if leadVeh and leadVeh[1] <= 10 and self._currentSpeed != 0:
                 traci.vehicle.setSpeed(veh, speed)
             else:
-                traci.vehicle.setSpeed(veh, -1)
+                traci.vehicle.setSpeed(veh, speed + self._acceleration)

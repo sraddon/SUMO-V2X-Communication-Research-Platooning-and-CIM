@@ -1,21 +1,25 @@
+from src.intersectionController import IntersectionController
 from src.platoon import Platoon
 from src.simlib import flatten
+
 import traci
-import logging
 
 
 class SimulationManager():
 
-    def __init__(self, pCreation=True, pCoordination=True, pZipping=True):
+    def __init__(self, pCreation=True, iCoordination=True, iZipping=True):
         self.platoons = list()
         self.platoonCreation = pCreation
-        self.platoonCoordination = pCoordination
-        self.platoonZipping = pZipping
         # Generate all node link numbers at first run,
         # this markedly improves performance
         self.laneNodeConnections = dict()
         for lane in traci.lane.getIDList():
             self.laneNodeConnections[lane] = traci.lane.getLinkNumber(lane)
+        self.intersections = []
+        if iCoordination:
+            for intersection in traci.trafficlights.getIDList():
+                controller = IntersectionController(intersection, iZipping)
+                self.intersections.append(controller)
 
     def createPlatoon(self, vehicles):
         # Creates a platoon with the given vehicles
@@ -42,12 +46,12 @@ class SimulationManager():
         # vehicle by looking to see if the car in front is part of a platoon
         # It also checks that the platoon is heading in the right direction
 
-        leadVeh = traci.vehicle.getLeader(vehicle, 20)
-        if leadVeh:
+        leadVeh = traci.vehicle.getLeader(vehicle, 0)
+        if leadVeh and leadVeh[1] < 10:
             possiblePlatoon = self.getPlatoonByVehicle(leadVeh[0])
             assert(len(possiblePlatoon) <= 1,
                    "Only 1 platoon should be returned")
-            if possiblePlatoon and not possiblePlatoon[0]._scheduled:
+            if possiblePlatoon:
                 if possiblePlatoon[0].checkVehiclePathsConverge([vehicle]):
                     return possiblePlatoon[0]
 
@@ -65,38 +69,15 @@ class SimulationManager():
             for vehicleID in vehiclesNotInPlatoons:
                 vehicleLane = traci.vehicle.getLaneID(vehicleID)
                 # If we're not in a starting segment (speed starts as 0)
-                if self.laneNodeConnections[vehicleLane] > 1:
+                if "in" not in vehicleLane:
                     possiblePlatoon = self.getReleventPlatoon(vehicleID)
                     if possiblePlatoon:
                         possiblePlatoon.addVehicle(vehicleID)
                     else:
                         self.createPlatoon([vehicleID, ])
+            # TODO handle merging of platoons
 
-        if self.platoonCoordination:
-            for t in traci.trafficlights.getIDList():
-                platoons = [self.getPlatoonByLane(
-                    l) for l in set(traci.trafficlights.getControlledLanes(t))]
-                platoons = [p for p in flatten(platoons) if not p._scheduled]
-
-                def platoonPosition(platoon):
-                    return platoon.getLanePosition()
-
-                platoons.sort(key=platoonPosition)
-                secsJReserved = 1
-                if platoons and platoons[0].getLanePosition() < 150:
-
-                    for p in platoons:
-                        distanceToTravel = p.getLanePosition()
-                        speed = distanceToTravel / secsJReserved
-                        # If we're above the max speed, we use that instead
-                        if speed > p.getMaxSpeed():
-                            speed = p.getMaxSpeed()
-                        p.setSpeed(speed)
-                        logging.info("platoon: %s, lane: %s, dist: %s, speed: %s", p.getID(), p._lane, distanceToTravel, speed)
-
-                        lengthThruJunc = p.getLanePosition() + p.getLength()
-                        secsJReserved = secsJReserved + (lengthThruJunc / speed)
-                        p._scheduled = True
-
-        if self.platoonZipping:
-            pass
+        if self.intersections:
+            for inControl in self.intersections:
+                inControl.findAndAddReleventPlatoons(self.getActivePlatoons())
+                inControl.update()
