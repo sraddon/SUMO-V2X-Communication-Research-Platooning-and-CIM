@@ -61,6 +61,10 @@ class SimulationManager():
             # Update all active platoons in the scenario
             for platoon in self.getActivePlatoons():
                 platoon.update()
+                if platoon.getCurrentSpeed() == 0:
+                    lead = traci.vehicle.getLeader(platoon.getLeadVehicle())
+                    if lead:
+                        self.getPlatoonByVehicle(lead[0])[0].mergePlatoon(platoon)
             # See whether there are any vehicles that are not
             # in a platoon that should be in one
             vehiclesNotInPlatoons = [v for v in traci.vehicle.getIDList(
@@ -75,7 +79,6 @@ class SimulationManager():
                         possiblePlatoon.addVehicle(vehicleID)
                     else:
                         self.createPlatoon([vehicleID, ])
-            # TODO handle merging of platoons
 
         if self.intersections:
             for inControl in self.intersections:
