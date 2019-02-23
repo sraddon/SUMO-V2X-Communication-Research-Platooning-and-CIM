@@ -6,7 +6,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from sumolib import checkBinary
 from src.simulationmanager import SimulationManager
 
-
 # Check SUMO has been set up properly
 sumoBinary = checkBinary("sumo-gui")
 
@@ -16,8 +15,8 @@ root = logging.getLogger()
 root.setLevel(logging.DEBUG)
 
 # Start Simulation and step through
-traci.start([sumoBinary, "-c", "CoordIntersection-FullV2X.sumocfg",
-             "--step-length", "0.1", "--collision.action", "none"])
+traci.start([sumoBinary, "-c", "Scenario 3 - CoordinatedIntersection - V2X controlled/CoordIntersection-FullV2X.sumocfg",
+             "--step-length", "0.1", "--collision.action", "none", "--start", "--quit-on-end"])
 step = 0
 manager = SimulationManager()
 while step < 5000:

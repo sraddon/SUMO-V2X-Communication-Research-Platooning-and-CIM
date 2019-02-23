@@ -13,7 +13,7 @@ root.setLevel(logging.DEBUG)
 
 # Start Simulation and step through
 traci.start([sumoBinary, "-c", "NormalIntersection.sumocfg",
-             "--step-length", "0.1"])
+             "--step-length", "0.1", "--start", "--quit-on-end"])
 step = 0
 while step < 5000:
     traci.simulationStep()

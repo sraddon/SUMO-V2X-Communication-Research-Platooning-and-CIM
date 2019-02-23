@@ -16,8 +16,8 @@ root = logging.getLogger()
 root.setLevel(logging.DEBUG)
 
 # Start Simulation and step through
-traci.start([sumoBinary, "-c", "CoordIntersection.sumocfg",
-             "--step-length", "0.1", "--collision.action", "none"])
+traci.start([sumoBinary, "-c", "Scenario 2 - CoordinatedIntersection/CoordIntersection.sumocfg",
+             "--step-length", "0.1", "--collision.action", "none", "--start", "--quit-on-end"])
 step = 0
 manager = SimulationManager(True, False)
 while step < 5000:
