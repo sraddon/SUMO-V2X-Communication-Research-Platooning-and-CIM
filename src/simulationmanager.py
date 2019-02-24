@@ -1,6 +1,8 @@
 from src.intersectionController import IntersectionController
 from src.platoon import Platoon
+from src.vehicle import Vehicle
 from src.simlib import flatten
+
 
 import traci
 
@@ -8,9 +10,10 @@ import traci
 class SimulationManager():
 
     def __init__(self, pCreation=True, iCoordination=True, iZipping=True):
+        self.intersections = []
         self.platoons = list()
         self.platoonCreation = pCreation
-        self.intersections = []
+        self.vehicles = list()
         if iCoordination:
             for intersection in traci.trafficlights.getIDList():
                 controller = IntersectionController(intersection, iZipping)
@@ -27,20 +30,20 @@ class SimulationManager():
 
     def getAllVehiclesInPlatoons(self):
         # Gets all vehicles in every active platoon
-        return flatten(p.getAllVehicles() for p in self.getActivePlatoons())
+        return flatten(p.getAllVehiclesByName() for p in self.getActivePlatoons())
 
     def getPlatoonByLane(self, lane):
         # Gets platoons corresponding to a given lane
         return [p for p in self.getActivePlatoons() if lane == p.getLane()]
 
     def getPlatoonByVehicle(self, v):
-        return [p for p in self.getActivePlatoons() if v in p.getAllVehicles()]
+        return [p for p in self.getActivePlatoons() if v in p.getAllVehiclesByName()]
 
     def getReleventPlatoon(self, vehicle):
         # Returns a single platoon that is most relevent to the given
         # vehicle by looking to see if the car in front is part of a platoon
         # It also checks that the platoon is heading in the right direction
-        leadVeh = traci.vehicle.getLeader(vehicle, 0)
+        leadVeh = vehicle.getLeader()
         if leadVeh and leadVeh[1] < 10:
             possiblePlatoon = self.getPlatoonByVehicle(leadVeh[0])
             assert(len(possiblePlatoon) <= 1,
@@ -50,6 +53,12 @@ class SimulationManager():
                     return possiblePlatoon[0]
 
     def handleSimulationStep(self):
+        allVehicles = traci.vehicle.getIDList()
+        # Check mark vehicles as in-active if they are outside the map
+        for v in self.vehicles:
+            if v.getName() not in allVehicles:
+                v.setInActive()
+
         if self.intersections:
             for inControl in self.intersections:
                 inControl.findAndAddReleventPlatoons(self.getActivePlatoons())
@@ -60,20 +69,23 @@ class SimulationManager():
             # Update all active platoons in the scenario
             for platoon in self.getActivePlatoons():
                 platoon.update()
-                if platoon.getCurrentSpeed() == 0:
-                    lead = traci.vehicle.getLeader(platoon.getLeadVehicle())
+                # Manage merging of platoons
+                if platoon.getSpeed() == 0:
+                    lead = platoon.getLeadVehicle().getLeader()
                     if lead and self.getPlatoonByVehicle(lead[0]):
                         self.getPlatoonByVehicle(lead[0])[0].mergePlatoon(platoon)
+            
             # See whether there are any vehicles that are not
             # in a platoon that should be in one
-            vehiclesNotInPlatoons = [v for v in traci.vehicle.getIDList(
-            ) if v not in self.getAllVehiclesInPlatoons()]
+            vehiclesNotInPlatoons = [v for v in allVehicles if v not in self.getAllVehiclesInPlatoons()]
 
             for vehicleID in vehiclesNotInPlatoons:
-                vehicleLane = traci.vehicle.getLaneID(vehicleID)
+                vehicle = Vehicle(vehicleID)
+                self.vehicles.append(vehicle)
+                vehicleLane = vehicle.getLane()
                 # If we're not in a starting segment (speed starts as 0)
-                possiblePlatoon = self.getReleventPlatoon(vehicleID)
+                possiblePlatoon = self.getReleventPlatoon(vehicle)
                 if possiblePlatoon:
-                    possiblePlatoon.addVehicle(vehicleID)
+                    possiblePlatoon.addVehicle(vehicle)
                 else:
-                    self.createPlatoon([vehicleID, ])
+                    self.createPlatoon([vehicle, ])
