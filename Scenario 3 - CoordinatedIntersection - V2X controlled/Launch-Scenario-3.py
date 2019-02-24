@@ -18,7 +18,7 @@ root.setLevel(logging.DEBUG)
 traci.start([sumoBinary, "-c", "Scenario 3 - CoordinatedIntersection - V2X controlled/CoordIntersection-FullV2X.sumocfg",
              "--step-length", "0.1", "--collision.action", "none", "--start", "--quit-on-end"])
 step = 0
-manager = SimulationManager()
+manager = SimulationManager(True, True, False)
 while step < 5000:
     manager.handleSimulationStep()
     traci.simulationStep()

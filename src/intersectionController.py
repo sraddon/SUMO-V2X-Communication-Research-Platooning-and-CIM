@@ -10,7 +10,6 @@ class IntersectionController():
         lanes = traci.trafficlights.getControlledLanes(intersection)
         self.lanesServed = set(lanes)
         self.platoons = []
-        self.gapAtJunction = 0.2
 
     def addPlatoon(self, platoon):
         """
@@ -47,8 +46,7 @@ class IntersectionController():
         self.platoons.remove(platoon)
         # Resume normal speed behaviour
         platoon.removeTargetSpeed()
-        for v in platoon.getAllVehicles():
-            traci.vehicle.setSpeedMode(v, 31)
+        platoon.setPlatoonSpeedMode(31)
 
     def updatePlatoonSpeed(self, platoon, reservedTime):
         """
@@ -63,6 +61,7 @@ class IntersectionController():
         # towards 0 (as the distance we give is to the junction and not to the end of the platoon's
         # route.
         if distanceToTravel > 20:
+            platoon.setPlatoonSpeedMode(23)
             speed = distanceToTravel / (reservedTime or 1)
             speed = max([speed, platoon.getAcceleration()])
             # If we're above the max speed, we use that instead
@@ -73,6 +72,7 @@ class IntersectionController():
         elif platoon.getCurrentSpeed() == 0:
             platoon.removeTargetSpeed()
         else:
+            platoon.setPlatoonSpeedMode(22)
             platoon.setTargetSpeed(platoon.getCurrentSpeed())
 
         # If this platoon is the first to post a reservation, the distance to the junction needs to be included
@@ -80,9 +80,7 @@ class IntersectionController():
             lenThruJunc = self._getPlatoonLanePosition(platoon) + platoon.getLength()
         else:
             lenThruJunc = platoon.getLength()
-
-        # Only add reservation time if the platoon is approaching the junction (and hasn't past it)
-        return self.gapAtJunction + reservedTime + (lenThruJunc / (platoonCurrentSpeed or 1))
+        return reservedTime + (lenThruJunc / (platoonCurrentSpeed or 1))
 
     def update(self):
         """
@@ -91,19 +89,16 @@ class IntersectionController():
            stopping behaviour deactived (otherwise they are too cautious at the intersection)
         2. Removes platoons that are no longer in the sphere of influence of the function
         3. Updates the speed of all platoons being managed by the controller.
-
         """
-        reservedTime = 0
-        for p in self.platoons:
-            for v in p.getAllVehicles():
-                traci.vehicle.setSpeedMode(v, 23)
-            # Do we need to remove any platoons from our control?
-            if all([l not in self.lanesServed for l in p.getLanesOfAllVehicles()]):
-                self.removePlatoon(p)
-            # Update the speeds of the platoon
-            elif p.getLane() in self.lanesServed:
-                reservedTime = self.updatePlatoonSpeed(p, reservedTime)
-        self.logIntersectionStatus(reservedTime)
+        if len(self.platoons) > 1:
+            reservedTime = 0
+            for p in self.platoons:
+                # Do we need to remove any platoons from our control?
+                if all([l not in self.lanesServed for l in p.getLanesOfAllVehicles()]):
+                    self.removePlatoon(p)
+                # Update the speeds of the platoon if it has not passed the junction
+                elif p.getLane() in self.lanesServed:
+                    reservedTime = self.updatePlatoonSpeed(p, reservedTime)
 
     def logIntersectionStatus(self, reservation=None):
         """

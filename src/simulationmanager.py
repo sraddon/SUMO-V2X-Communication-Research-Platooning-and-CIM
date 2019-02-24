@@ -10,11 +10,6 @@ class SimulationManager():
     def __init__(self, pCreation=True, iCoordination=True, iZipping=True):
         self.platoons = list()
         self.platoonCreation = pCreation
-        # Generate all node link numbers at first run,
-        # this markedly improves performance
-        self.laneNodeConnections = dict()
-        for lane in traci.lane.getIDList():
-            self.laneNodeConnections[lane] = traci.lane.getLinkNumber(lane)
         self.intersections = []
         if iCoordination:
             for intersection in traci.trafficlights.getIDList():
@@ -45,7 +40,6 @@ class SimulationManager():
         # Returns a single platoon that is most relevent to the given
         # vehicle by looking to see if the car in front is part of a platoon
         # It also checks that the platoon is heading in the right direction
-
         leadVeh = traci.vehicle.getLeader(vehicle, 0)
         if leadVeh and leadVeh[1] < 10:
             possiblePlatoon = self.getPlatoonByVehicle(leadVeh[0])
@@ -56,6 +50,11 @@ class SimulationManager():
                     return possiblePlatoon[0]
 
     def handleSimulationStep(self):
+        if self.intersections:
+            for inControl in self.intersections:
+                inControl.findAndAddReleventPlatoons(self.getActivePlatoons())
+                inControl.update()
+
         if self.platoonCreation:
             # Handles a single step of the simulation
             # Update all active platoons in the scenario
@@ -63,7 +62,7 @@ class SimulationManager():
                 platoon.update()
                 if platoon.getCurrentSpeed() == 0:
                     lead = traci.vehicle.getLeader(platoon.getLeadVehicle())
-                    if lead:
+                    if lead and self.getPlatoonByVehicle(lead[0]):
                         self.getPlatoonByVehicle(lead[0])[0].mergePlatoon(platoon)
             # See whether there are any vehicles that are not
             # in a platoon that should be in one
@@ -78,8 +77,3 @@ class SimulationManager():
                     possiblePlatoon.addVehicle(vehicleID)
                 else:
                     self.createPlatoon([vehicleID, ])
-
-        if self.intersections:
-            for inControl in self.intersections:
-                inControl.findAndAddReleventPlatoons(self.getActivePlatoons())
-                inControl.update()
