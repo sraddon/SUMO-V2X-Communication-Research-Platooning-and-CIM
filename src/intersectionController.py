@@ -6,27 +6,34 @@ from src.simlib import flatten
 class IntersectionController():
 
     def __init__(self, intersection, zip=True):
-        self.name = intersection
-        self.zip = zip
         lanes = traci.trafficlights.getControlledLanes(intersection)
         self.lanesServed = set(lanes)
+        self.name = intersection
         self.platoons = []
+        self.platoonsZipped = set()
+        self.platoonZips = []
+        self.zip = zip
 
     def addPlatoon(self, platoon):
         """
         Adds a platoon to this intersection controller
         """
         self.platoons.append(platoon)
+        if self.zip:
+            platoon.addControlledLanes(self.lanesServed)
 
-    def _getLanePosition(self, v):
-        """
-        Gets a platoon's lane position in relation to this intersection
-        (gives 0 if the platoon is on an edge not controlled by this controller)
-        """
-        if v.isActive():
-            if v.getLane() in self.lanesServed:
-                return v.getLanePositionFromFront()
-        return 0
+    def calculateNewReservedTime(self, pv, reservedTime):
+        # If this platoon is the first to post a reservation, the distance to the junction needs to be included
+        if reservedTime == 0:
+            lenThruJunc = self._getLanePosition(pv) + pv.getLength()
+        else:
+            lenThruJunc = pv.getLength() * 3 if self.zip else 1
+        return reservedTime + (lenThruJunc / (pv.getSpeed() or 1))
+
+    def _eligibleZippings(self, platoon):
+        for z in self.platoonZips:
+            if platoon.getLanePositionFromFront() - z[-1].getLanePositionFromFront() < 10:
+                return z
 
     def findAndAddReleventPlatoons(self, platoons):
         """
@@ -41,6 +48,51 @@ class IntersectionController():
             if p.getLane() in self.lanesServed and p not in self.platoons:
                 self.addPlatoon(p)
 
+    def getVehicleOrderThroughJunc(self):
+        return flatten([self._zipPlatoons(z) for z in self.platoonZips])
+
+    def _generatePlatoonZips(self):
+        for p in self.platoons:
+            if p not in self.platoonsZipped:
+                eligibleZipping = self._eligibleZippings(p)
+                if eligibleZipping:
+                    eligibleZipping.append(p)
+                else:
+                    self.platoonZips.append([p])
+                self.platoonsZipped.add(p)
+
+    def _getLanePosition(self, v):
+        """
+        Gets a platoon's lane position in relation to this intersection
+        (gives 0 if the platoon is on an edge not controlled by this controller)
+        """
+        if v.isActive():
+            if v.getLane() in self.lanesServed:
+                return v.getLanePositionFromFront()
+        return 1000
+
+    def getNewSpeed(self, pv, reservedTime):
+        distanceToTravel = self._getLanePosition(pv)
+        currentSpeed = pv.getSpeed()
+        # If we are in the last 20 metres, we assume no more vehicles will join the platoon
+        # and then set the speed to be constant. This is because if we did not speed tends
+        # towards 0 (as the distance we give is to the junction and not to the end of the platoon's
+        # route.
+        if distanceToTravel > 15:
+            pv.setSpeedMode(23)
+            speed = distanceToTravel / (reservedTime or 1)
+            speed = max([speed, pv.getAcceleration()])
+            if speed >= currentSpeed:
+                speed = pv.getMaxSpeed()
+        elif currentSpeed == 0:
+            speed = pv.getMaxSpeed()
+        else:
+            pv.setSpeedMode(22)
+            speed = currentSpeed
+        if reservedTime == 0:
+            return pv.getMaxSpeed()
+        return speed
+
     def removePlatoon(self, platoon):
         """
         Removes a platoon from this controller and then resets its behaviour to default
@@ -48,71 +100,9 @@ class IntersectionController():
         self.platoons.remove(platoon)
         # Resume normal speed behaviour
         platoon.removeTargetSpeed()
-        platoon.setPlatoonSpeedMode(31)
-
-    def getAllVehicles(self):
-        def vehiclePosition(vehicle):
-            return self._getLanePosition(vehicle)
-
-        v = flatten([p.getAllVehicles() for p in self.platoons])
-        v.sort(key=vehiclePosition)
-        return v
-
-    def getNewPlatoonSpeed(self, platoon, reservedTime):
-        """
-        Takes a platoon and the time the junction has been reserved for and changes
-        its speed accordingly.
-        Returns the updated junction reservation time.
-        """
-        distanceToTravel = self._getLanePosition(platoon)
-        platoonCurrentSpeed = platoon.getSpeed()
-        # If we are in the last 20 metres, we assume no more vehicles will join the platoon
-        # and then set the speed to be constant. This is because if we did not speed tends
-        # towards 0 (as the distance we give is to the junction and not to the end of the platoon's
-        # route.
-        if distanceToTravel > 20:
-            platoon.setPlatoonSpeedMode(23)
-            speed = distanceToTravel / (reservedTime or 1)
-            speed = max([speed, platoon.getAcceleration()])
-            # If we're above the max speed, we use that instead
-            if speed >= platoonCurrentSpeed:
-                speed = -1
-        elif platoonCurrentSpeed == 0:
-            speed = -1
-        else:
-            platoon.setPlatoonSpeedMode(22)
-            speed = platoonCurrentSpeed
-        return speed
-
-    def getNewVehicleSpeed(self, vehicle, reservedTime):
-        distanceToTravel = vehicle.getLanePositionFromFront()
-        currentSpeed = vehicle.getSpeed()
-        # If we are in the last 20 metres, we assume no more vehicles will join the platoon
-        # and then set the speed to be constant. This is because if we did not speed tends
-        # towards 0 (as the distance we give is to the junction and not to the end of the platoon's
-        # route.
-        if distanceToTravel > 20:
-            vehicle.setSpeedMode(23)
-            speed = distanceToTravel / (reservedTime or 1)
-            speed = max([speed, vehicle.getAcceleration()])
-            # If we're above the max speed, we use that instead
-            if speed >= currentSpeed:
-                speed = -1
-        elif currentSpeed == 0:
-            speed = -1
-        else:
-            vehicle.setSpeedMode(22)
-            speed = currentSpeed
-        return speed
-
-    def calculateNewReservedTime(self, v, reservedTime):
-        # If this platoon is the first to post a reservation, the distance to the junction needs to be included
-        speed = v.getSpeed()
-        if reservedTime == 0:
-            lenThruJunc = self._getLanePosition(v) + v.getLength()
-        else:
-            lenThruJunc = v.getLength()
-        return reservedTime + (lenThruJunc / (speed or 1))
+        platoon.setSpeedMode(31)
+        if self.zip:
+            platoon.removeControlledLanes(self.lanesServed)
 
     def update(self):
         """
@@ -124,36 +114,53 @@ class IntersectionController():
         """
         if len(self.platoons) > 1:
             reservedTime = 0
-            if self.zip:
-                for p in self.platoons:
-                    if all([l not in self.lanesServed for l in p.getLanesOfAllVehicles()]):
-                        self.removePlatoon(p)
-                    p._manualControl = True
-                for v in self.getAllVehicles():
-                    speed = self.getNewVehicleSpeed(v, reservedTime)
-                    v.setSpeed(speed)
-                    reservedTime = self.calculateNewReservedTime(v, reservedTime)
-
+            # Do we need to remove any platoons from our control?
             for p in self.platoons:
-                # Do we need to remove any platoons from our control?
                 if all([l not in self.lanesServed for l in p.getLanesOfAllVehicles()]):
                     self.removePlatoon(p)
-                # Update the speeds of the platoon if it has not passed the junction
-                elif p.getLane() in self.lanesServed:
-                    speed = self.getNewPlatoonSpeed(p, reservedTime)
-                    if speed == -1:
-                        p.removeTargetSpeed()
-                    else:
-                        p.setTargetSpeed(speed)
-                    reservedTime = self.calculateNewReservedTime(p, reservedTime)
+            if self.zip:
+                self._generatePlatoonZips()
+                for v in self.getVehicleOrderThroughJunc():
+                    if v.isActive() and v.getLane() in self.lanesServed:
+                        speed = self.getNewSpeed(v, reservedTime)
+                        v.setSpeed(speed)
+                        reservedTime = self.calculateNewReservedTime(v, reservedTime)
+            else:
+                for p in self.platoons:
+                    # Update the speeds of the platoon if it has not passed the junction
+                    if p.getLane() in self.lanesServed:
+                        speed = self.getNewSpeed(p, reservedTime)
+                        if speed == -1:
+                            p.removeTargetSpeed()
+                        else:
+                            p.setTargetSpeed(speed)
+                        reservedTime = self.calculateNewReservedTime(p, reservedTime)
+            self._logIntersectionStatus(reservedTime)
 
-    def logIntersectionStatus(self, reservation=None):
+    def _logIntersectionStatus(self, reservation=None):
         """
         A function that logs the status of this intersection.
         """
         if self.platoons:
             logging.info("------------%s Information------------", self.name)
-            for p in self.platoons:
-                logging.info("Platoon: %s, Target: %s, Current: %s ", p.getID(), p.getTargetSpeed(), p.getSpeed())
+            if self.zip:
+                for p in self.platoons:
+                    logging.info("------Platoon: %s------", p.getID())
+                    for v in p.getAllVehicles():
+                        if v.isActive():
+                            setSpeed = v._previouslySetValues['setSpeed'] if 'setSpeed' in v._previouslySetValues else "None"
+                            logging.info("Vehicle: %s, Target: %s, Current: %s", v.getName(), setSpeed, v.getSpeed())
+            else:
+                for p in self.platoons:
+                    logging.info("Platoon: %s, Target: %s, Current: %s ", p.getID(), p.getTargetSpeed(), p.getSpeed())
             if reservation:
                 logging.info("Total time reserved: %s", reservation)
+
+    def _zipPlatoons(self, platoons):
+        ret = []
+        iterations = max([len(p.getAllVehicles()) for p in platoons])
+        for i in range(0, iterations):
+            for p in platoons:
+                if len(p.getAllVehicles()) > i:
+                    ret.append(p.getAllVehicles()[i])
+        return ret

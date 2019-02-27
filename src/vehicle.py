@@ -9,8 +9,7 @@ class Vehicle():
         self._maxSpeed = traci.vehicle.getMaxSpeed(vehicle)
         self._name = vehicle
         self._route = traci.vehicle.getRoute(vehicle)
-        self.previouslySetValues = dict()
-        self._setSpeed = -1
+        self._previouslySetValues = dict()
         self._speedMode = traci.vehicle.getSpeedMode(vehicle)
 
     def getAcceleration(self):
@@ -72,8 +71,8 @@ class Vehicle():
 
     def _setAttr(self, attr, arg):
         if self.isActive():
-            if attr in self.previouslySetValues:
-                if self.previouslySetValues[attr] == arg:
+            if attr in self._previouslySetValues:
+                if self._previouslySetValues[attr] == arg:
                     return
-            self.previouslySetValues[attr] = arg
+            self._previouslySetValues[attr] = arg
             getattr(traci.vehicle, attr)(self.getName(), arg)

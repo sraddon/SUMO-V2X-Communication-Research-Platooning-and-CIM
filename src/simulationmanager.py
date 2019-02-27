@@ -6,7 +6,6 @@ from src.simlib import flatten
 
 import traci
 
-
 class SimulationManager():
 
     def __init__(self, pCreation=True, iCoordination=True, iZipping=True):

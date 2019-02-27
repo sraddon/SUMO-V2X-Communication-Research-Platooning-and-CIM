@@ -16,18 +16,22 @@ class Platoon():
         self._currentSpeed = self.getLeadVehicle().getSpeed()
         self._lane = self.getLeadVehicle().getLane()
         self._lanePosition = self.getLeadVehicle().getLanePosition()
-        self._manualControl = False
+        self._controlledLanes = set()
         self._targetSpeed = -1
 
         self.getLeadVehicle().setColor(self._color)
         self.startBehaviour(startingVehicles[1:])
+
+    def addControlledLanes(self, lanes):
+        for lane in lanes:
+            self._controlledLanes.add(lane)
 
     def addVehicle(self, vehicle):
         """Adds a single vehicle to this platoon"""
         self._vehicles.append(vehicle)
         self.startBehaviour([vehicle, ])
         logging.info("Adding %s to platoon %s, New length: %s",
-                     vehicle, self.getID(), len(self._vehicles))
+                     vehicle.getName(), self.getID(), len(self._vehicles))
 
     def checkVehiclePathsConverge(self, vehicles):
         # Check that the given vehicles are going to follow the lead
@@ -62,7 +66,7 @@ class Platoon():
 
     def getID(self):
         """Generates and returns a unique ID for this platoon"""
-        return "%s" % (self.getLeadVehicle())
+        return "%s" % (self.getLeadVehicle().getName())
 
     def getLane(self):
         return self._lane
@@ -118,6 +122,10 @@ class Platoon():
                           platoon.getID(), self.getID())
             return False
 
+    def removeControlledLanes(self, lanes):
+        for lane in lanes:
+            self._controlledLanes.remove(lane)
+
     def removeTargetSpeed(self):
         """
         Removes the target speed from this platoon
@@ -131,7 +139,7 @@ class Platoon():
         for veh in self.getAllVehicles():
             veh.setTau(gap)
 
-    def setPlatoonSpeedMode(self, speedMode):
+    def setSpeedMode(self, speedMode):
         for v in self.getAllVehicles():
             v.setSpeedMode(speedMode)
 
@@ -178,13 +186,12 @@ class Platoon():
         self._lanePosition = self.getLeadVehicle().getLanePosition()
 
         # Speed Update
-        if not self._manualControl:
-            self._currentSpeed = self.getLeadVehicle().getSpeed()
-            if self._targetSpeed != -1:
-                self._updateSpeed(self._targetSpeed)
-            else:
-                self.getLeadVehicle().setSpeed(-1)
-                self._updateSpeed(self._currentSpeed, False)
+        self._currentSpeed = self.getLeadVehicle().getSpeed()
+        if self._targetSpeed != -1:
+            self._updateSpeed(self._targetSpeed)
+        else:
+            self.getLeadVehicle().setSpeed(-1)
+            self._updateSpeed(self._currentSpeed, False)
 
         # Route updates
         # Check that all cars still want to continue onto the
@@ -199,17 +206,19 @@ class Platoon():
             Also checks that the platoon is bunched together, this allows
             for vehicles to "catch-up"
         """
-        if inclLeadingVeh:
+        if inclLeadingVeh and self.getLeadVehicle().getLane() not in self._controlledLanes:
             self.getLeadVehicle().setSpeed(speed)
 
         # Non leading vehicles should follow the speed of the vehicle in front
         vehicles = self._vehicles[1:]
         for veh in vehicles:
-            # If we're in range of the leader and they are moving
-            # follow thier speed
-            # Otherwise follow vehicle speed limit rules to catch up
-            leadVeh = veh.getLeader()
-            if leadVeh and leadVeh[1] <= 10 and self._currentSpeed != 0:
-                veh.setSpeed(speed)
-            else:
-                veh.setSpeed(-1)
+            # Only set the speed if the vehicle is not in a lane controlled by a third party.
+            if veh.getLane() not in self._controlledLanes:
+                # If we're in range of the leader and they are moving
+                # follow thier speed
+                # Otherwise follow vehicle speed limit rules to catch up
+                leadVeh = veh.getLeader()
+                if leadVeh and leadVeh[1] <= 10 and self._currentSpeed != 0:
+                    veh.setSpeed(speed)
+                else:
+                    veh.setSpeed(-1)
