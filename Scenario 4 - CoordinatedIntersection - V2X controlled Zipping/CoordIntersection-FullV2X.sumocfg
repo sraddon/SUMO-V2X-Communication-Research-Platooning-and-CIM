@@ -1,7 +1,0 @@
-<configuration>
-   <input>
-       <net-file value="CoordIntersection-FullV2X.net.xml"/>
-       <route-files value="CoordIntersection-FullV2X.rou.xml"/>
-	   <gui-settings-file value="gui.settings.xml"/>
-   </input>
-</configuration>

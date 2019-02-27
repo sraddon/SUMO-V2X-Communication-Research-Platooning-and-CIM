@@ -28,7 +28,7 @@ class IntersectionController():
             lenThruJunc = self._getLanePosition(pv) + pv.getLength()
         else:
             lenThruJunc = pv.getLength() * 3 if self.zip else 1
-        return reservedTime + (lenThruJunc / (pv.getSpeed() or 1))
+        return 0.5 + reservedTime + (lenThruJunc / (pv.getSpeed() or 1))
 
     def _eligibleZippings(self, platoon):
         for z in self.platoonZips:
@@ -78,7 +78,7 @@ class IntersectionController():
         # and then set the speed to be constant. This is because if we did not speed tends
         # towards 0 (as the distance we give is to the junction and not to the end of the platoon's
         # route.
-        if distanceToTravel > 15:
+        if distanceToTravel > 20:
             pv.setSpeedMode(23)
             speed = distanceToTravel / (reservedTime or 1)
             speed = max([speed, pv.getAcceleration()])
