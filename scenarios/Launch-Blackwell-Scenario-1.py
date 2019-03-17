@@ -6,7 +6,7 @@ from src.simlib import setUpSimulation
 
 setUpSimulation("maps/BlackwellTunnelNorthApproach/BlackwellTunnelNorthApproach.sumocfg", 2)
 step = 0
-while step < 10000:
+while step < 5000:
     traci.simulationStep()
     step += 1
 

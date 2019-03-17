@@ -1,0 +1,15 @@
+<routes>
+    <vType id="normal_car" vClass="passenger" departspeed="0" departPos="last" maxSpeed="30" speedFactor="0.9" speedDev="0.1" sigma="0"/>
+    <flow id="downflow1" type="normal_car" begin="0" end="5000" number="500" from="upin" to="downout" departPos="last" departLane="random" />
+    <flow id="downflow2" type="normal_car" begin="0" end="5000" number="500" from="upin" to="rightout" departPos="last" departLane="random" />
+    <flow id="downflow3" type="normal_car" begin="0" end="5000" number="500" from="upin" to="leftout" departPos="last" departLane="random" />
+    <flow id="upflow1" type="normal_car" begin="0" end="5000" number="500" from="downin" to="upout" departPos="last" departLane="random" />
+    <flow id="upflow2" type="normal_car" begin="0" end="5000" number="500" from="downin" to="leftout" departPos="last" departLane="random" />
+    <flow id="upflow3" type="normal_car" begin="0" end="5000" number="500" from="downin" to="rightout" departPos="last" departLane="random" />
+    <flow id="rightflow1" type="normal_car" begin="0" end="5000" number="500" from="leftin" to="rightout" departPos="last" departLane="random" />
+    <flow id="rightflow2" type="normal_car" begin="0" end="5000" number="500" from="leftin" to="upout" departPos="last" departLane="random" />
+    <flow id="rightflow3" type="normal_car" begin="0" end="5000" number="500" from="leftin" to="downout" departPos="last" departLane="random" />
+    <flow id="leftflow1" type="normal_car" begin="0" end="5000" number="500" from="rightin" to="leftout" departPos="last" departLane="random" />
+    <flow id="leftflow2" type="normal_car" begin="0" end="5000" number="500" from="rightin" to="downout" departPos="last" departLane="random" />
+    <flow id="leftflow3" type="normal_car" begin="0" end="5000" number="500" from="rightin" to="upout" departPos="last" departLane="random" />
+</routes>

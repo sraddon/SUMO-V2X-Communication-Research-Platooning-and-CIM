@@ -88,7 +88,7 @@ class IntersectionController():
             speed = pv.getMaxSpeed()
         else:
             pv.setSpeedMode(22)
-            speed = currentSpeed
+            speed = max([currentSpeed, 0.5])
         if reservedTime == 0:
             pv.setSpeedMode(22)
             return pv.getMaxSpeed()

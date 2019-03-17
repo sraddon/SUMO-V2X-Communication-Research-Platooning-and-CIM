@@ -182,6 +182,11 @@ class Platoon():
             self.disband()
             return
 
+        potentialNewLeader = self.getLeadVehicle().getLeader()
+        if potentialNewLeader and potentialNewLeader[0] in self.getAllVehiclesByName():
+            # Something has gone wrong disband the platoon
+            self.disband()
+
         # Location Info Update
         self._lane = self.getLeadVehicle().getLane()
         self._lanePosition = self.getLeadVehicle().getLanePosition()
@@ -220,8 +225,11 @@ class Platoon():
         # Non leading vehicles should follow the speed of the vehicle in front
         vehicles = self._vehicles[1:]
         for veh in vehicles:
-            if veh.getEdge() == leadVehEdge:
-                veh.setTargetLane(targetLane)
+            try:
+                if veh.getEdge() == leadVehEdge:
+                    veh.setTargetLane(targetLane)
+            except traci.TraCIException:
+                logging.error("Could not change lane of %s", veh.getName())
             # Only set the speed if the vehicle is not in a lane controlled by a third party.
             if veh.getLane() not in self._controlledLanes:
                 # If we're in range of the leader and they are moving

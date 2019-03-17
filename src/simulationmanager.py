@@ -68,7 +68,7 @@ class SimulationManager():
             # Update all active platoons in the scenario
             for platoon in self.getActivePlatoons():
                 platoon.update()
-                if platoon.canMerge():
+                if platoon.canMerge() and platoon.isActive():
                     lead = platoon.getLeadVehicle().getLeader()
                     if lead:
                         leadPlatoon = self.getPlatoonByVehicle(lead[0])
