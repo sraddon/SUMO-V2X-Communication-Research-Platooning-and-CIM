@@ -81,7 +81,7 @@ class IntersectionController():
         if distanceToTravel > 20:
             pv.setSpeedMode(23)
             speed = distanceToTravel / (reservedTime or 1)
-            speed = max([speed, 1])
+            speed = max([speed, 0.5])
             if speed >= currentSpeed:
                 speed = pv.getMaxSpeed()
         elif currentSpeed == 0:
@@ -90,6 +90,7 @@ class IntersectionController():
             pv.setSpeedMode(22)
             speed = currentSpeed
         if reservedTime == 0:
+            pv.setSpeedMode(22)
             return pv.getMaxSpeed()
         return speed
 

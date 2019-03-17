@@ -196,8 +196,9 @@ class Platoon():
         # Route updates
         # Check that all cars still want to continue onto the
         # next edge, otherwise disband the platoon
-        if not self.checkVehiclePathsConverge(self.getAllVehicles()):
-            self.disband()
+        if not self._currentSpeed == 0:
+            if not self.checkVehiclePathsConverge(self.getAllVehicles()):
+                self.disband()
 
     def _updateSpeed(self, speed, inclLeadingVeh=True):
         """ Sets the speed of all vehicles in the platoon
@@ -218,7 +219,7 @@ class Platoon():
                 # follow thier speed
                 # Otherwise follow vehicle speed limit rules to catch up
                 leadVeh = veh.getLeader()
-                if leadVeh and leadVeh[1] <= 10 and self._currentSpeed != 0:
+                if leadVeh and leadVeh[1] <= 5 and self._currentSpeed != 0:
                     veh.setSpeed(speed)
                 else:
                     veh.setSpeed(-1)
