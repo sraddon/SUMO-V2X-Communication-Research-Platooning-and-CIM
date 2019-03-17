@@ -48,7 +48,7 @@ class SimulationManager():
             assert(len(possiblePlatoon) <= 1,
                    "Only 1 platoon should be returned")
             if possiblePlatoon:
-                if possiblePlatoon[0].checkVehiclePathsConverge([vehicle]):
+                if possiblePlatoon[0].checkVehiclePathsConverge([vehicle]) and vehicle not in possiblePlatoon[0].getAllVehicles():
                     return possiblePlatoon[0]
 
     def handleSimulationStep(self):
@@ -68,11 +68,12 @@ class SimulationManager():
             # Update all active platoons in the scenario
             for platoon in self.getActivePlatoons():
                 platoon.update()
-                # Manage merging of platoons
-                if platoon.getSpeed() == 0:
+                if platoon.canMerge():
                     lead = platoon.getLeadVehicle().getLeader()
-                    if lead and self.getPlatoonByVehicle(lead[0]):
-                        self.getPlatoonByVehicle(lead[0])[0].mergePlatoon(platoon)
+                    if lead:
+                        leadPlatoon = self.getPlatoonByVehicle(lead[0])
+                        if leadPlatoon:
+                            leadPlatoon[0].mergePlatoon(platoon)
             
             # See whether there are any vehicles that are not
             # in a platoon that should be in one

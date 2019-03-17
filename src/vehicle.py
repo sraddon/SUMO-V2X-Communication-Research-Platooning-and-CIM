@@ -17,9 +17,15 @@ class Vehicle():
 
     def isActive(self):
         return self._active
+    
+    def getEdge(self):
+        return traci.vehicle.getRoadID(self.getName())
 
     def getLane(self):
         return traci.vehicle.getLaneID(self.getName())
+
+    def getLaneIndex(self):
+        return traci.vehicle.getLaneIndex(self.getName())
 
     def getLanePosition(self):
         return traci.vehicle.getLanePosition(self.getName())
@@ -42,6 +48,9 @@ class Vehicle():
     def getRemainingRoute(self):
         return self._route[traci.vehicle.getRouteIndex(self.getName()):]
 
+    def getRoute(self):
+        return self._route
+
     def getSpeed(self):
         return traci.vehicle.getSpeed(self.getName())
 
@@ -56,6 +65,9 @@ class Vehicle():
 
     def setMinGap(self, minGap):
         self._setAttr("setMinGap", minGap)
+
+    def setTargetLane(self, lane):
+        traci.vehicle.changeLane(self.getName(), lane, 10)
 
     def setTau(self, tau):
         self._setAttr("setTau", tau)

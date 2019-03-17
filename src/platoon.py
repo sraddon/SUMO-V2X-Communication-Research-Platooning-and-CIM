@@ -14,6 +14,7 @@ class Platoon():
         self._color = (random.randint(0, 255), random.randint(
             0, 255), random.randint(0, 255))
         self._currentSpeed = self.getLeadVehicle().getSpeed()
+        self._eligibleForMerging = False
         self._lane = self.getLeadVehicle().getLane()
         self._lanePosition = self.getLeadVehicle().getLanePosition()
         self._controlledLanes = set()
@@ -33,14 +34,17 @@ class Platoon():
         logging.info("Adding %s to platoon %s, New length: %s",
                      vehicle.getName(), self.getID(), len(self._vehicles))
 
+    def canMerge(self):
+        return self._eligibleForMerging
+
     def checkVehiclePathsConverge(self, vehicles):
         # Check that the given vehicles are going to follow the lead
         # vehicle into the next edge
         leadVehicleRoute = self.getLeadVehicle().getRemainingRoute()
         if len(leadVehicleRoute) > 1:
-            leadVehicleNextEdge = leadVehicleRoute[1]
+            leadVehicleNextEdge = leadVehicleRoute[0]
             for vehicle in vehicles:
-                if leadVehicleNextEdge not in vehicle.getRemainingRoute():
+                if leadVehicleNextEdge not in vehicle.getRoute():
                     return False
         return True
 
@@ -116,11 +120,8 @@ class Platoon():
             platoon.disband()
             for vehicle in platoon.getAllVehicles():
                 self.addVehicle(vehicle)
-            return True
-        else:
-            logging.error("Could not merge platoon %s with platoon %s",
-                          platoon.getID(), self.getID())
-            return False
+        self._eligibleForMerging = False
+        platoon._eligibleForMerging = False
 
     def removeControlledLanes(self, lanes):
         for lane in lanes:
@@ -152,7 +153,7 @@ class Platoon():
                 v.setMinGap(0)
                 v.setSpeedFactor(1)
                 v.setTau(0.05)
-        self.update()
+            self.update()
 
     def stopBehvaviour(self):
         """Stops vehicles exhibiting platoon behaviour, if they are
@@ -186,7 +187,10 @@ class Platoon():
         self._lanePosition = self.getLeadVehicle().getLanePosition()
 
         # Speed Update
-        self._currentSpeed = self.getLeadVehicle().getSpeed()
+        leadVehicleSpeed = self.getLeadVehicle().getSpeed()
+        if self._currentSpeed != 0 and leadVehicleSpeed == 0:
+            self._eligibleForMerging = True
+        self._currentSpeed = leadVehicleSpeed
         if self._targetSpeed != -1:
             self._updateSpeed(self._targetSpeed)
         else:
@@ -198,7 +202,7 @@ class Platoon():
         # next edge, otherwise disband the platoon
         if not self._currentSpeed == 0:
             if not self.checkVehiclePathsConverge(self.getAllVehicles()):
-                self.disband()
+                self.disband()            
 
     def _updateSpeed(self, speed, inclLeadingVeh=True):
         """ Sets the speed of all vehicles in the platoon
@@ -210,9 +214,14 @@ class Platoon():
         if inclLeadingVeh and self.getLeadVehicle().getLane() not in self._controlledLanes:
             self.getLeadVehicle().setSpeed(speed)
 
+        leadVehEdge = self.getLeadVehicle().getEdge()
+        targetLane = self.getLeadVehicle().getLaneIndex()
+
         # Non leading vehicles should follow the speed of the vehicle in front
         vehicles = self._vehicles[1:]
         for veh in vehicles:
+            if veh.getEdge() == leadVehEdge:
+                veh.setTargetLane(targetLane)
             # Only set the speed if the vehicle is not in a lane controlled by a third party.
             if veh.getLane() not in self._controlledLanes:
                 # If we're in range of the leader and they are moving
