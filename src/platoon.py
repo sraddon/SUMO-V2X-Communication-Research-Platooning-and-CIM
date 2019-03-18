@@ -167,6 +167,14 @@ class Platoon():
                 v.setSpeedFactor(0.9)
                 v.setTau(1)
 
+    def updateIsActive(self):
+        """
+        Is Active Update, if not disband
+        """
+        if not all([v.isActive() for v in self._vehicles]):
+            self.disband()
+            return True
+
     def update(self):
         """
         Performs updates to maintain the platoon
@@ -176,38 +184,35 @@ class Platoon():
         3. is this platoon still alive (in the map),
            should it be labelled as inactive?   
         """
+        self.updateIsActive()
 
-        # Is Active Update, if not disband and end update function
-        if not all([v.isActive() for v in self._vehicles]):
-            self.disband()
-            return
+        if self.isActive():
+            potentialNewLeader = self.getLeadVehicle().getLeader()
+            if potentialNewLeader and potentialNewLeader[0] in self.getAllVehiclesByName():
+                # Something has gone wrong disband the platoon
+                self.disband()
 
-        potentialNewLeader = self.getLeadVehicle().getLeader()
-        if potentialNewLeader and potentialNewLeader[0] in self.getAllVehiclesByName():
-            # Something has gone wrong disband the platoon
-            self.disband()
+            # Location Info Update
+            self._lane = self.getLeadVehicle().getLane()
+            self._lanePosition = self.getLeadVehicle().getLanePosition()
 
-        # Location Info Update
-        self._lane = self.getLeadVehicle().getLane()
-        self._lanePosition = self.getLeadVehicle().getLanePosition()
+            # Speed Update
+            leadVehicleSpeed = self.getLeadVehicle().getSpeed()
+            if self._currentSpeed != 0 and leadVehicleSpeed == 0:
+                self._eligibleForMerging = True
+            self._currentSpeed = leadVehicleSpeed
+            if self._targetSpeed != -1:
+                self._updateSpeed(self._targetSpeed)
+            else:
+                self.getLeadVehicle().setSpeed(-1)
+                self._updateSpeed(self._currentSpeed, False)
 
-        # Speed Update
-        leadVehicleSpeed = self.getLeadVehicle().getSpeed()
-        if self._currentSpeed != 0 and leadVehicleSpeed == 0:
-            self._eligibleForMerging = True
-        self._currentSpeed = leadVehicleSpeed
-        if self._targetSpeed != -1:
-            self._updateSpeed(self._targetSpeed)
-        else:
-            self.getLeadVehicle().setSpeed(-1)
-            self._updateSpeed(self._currentSpeed, False)
-
-        # Route updates
-        # Check that all cars still want to continue onto the
-        # next edge, otherwise disband the platoon
-        if not self._currentSpeed == 0:
-            if not self.checkVehiclePathsConverge(self.getAllVehicles()):
-                self.disband()            
+            # Route updates
+            # Check that all cars still want to continue onto the
+            # next edge, otherwise disband the platoon
+            if not self._currentSpeed == 0:
+                if not self.checkVehiclePathsConverge(self.getAllVehicles()):
+                    self.disband()            
 
     def _updateSpeed(self, speed, inclLeadingVeh=True):
         """ Sets the speed of all vehicles in the platoon

@@ -35,6 +35,12 @@ class IntersectionController():
             if platoon.getLanePositionFromFront() - z[-1].getLanePositionFromFront() < 10:
                 return z
 
+    def removeIrreleventPlatoons(self):
+        # Check if we need to remove any before adding new ones to the controller
+        for p in self.platoons:
+            if not p.isActive() or all([l not in self.lanesServed for l in p.getLanesOfAllVehicles()]):
+                self.removePlatoon(p)
+
     def findAndAddReleventPlatoons(self, platoons):
         """
         Finds platoons in the given list that can be managed by this controller, then
@@ -115,10 +121,6 @@ class IntersectionController():
         """
         if len(self.platoons) > 1:
             reservedTime = 0
-            # Do we need to remove any platoons from our control?
-            for p in self.platoons:
-                if all([l not in self.lanesServed for l in p.getLanesOfAllVehicles()]):
-                    self.removePlatoon(p)
             if self.zip:
                 self._generatePlatoonZips()
                 for v in self.getVehicleOrderThroughJunc():

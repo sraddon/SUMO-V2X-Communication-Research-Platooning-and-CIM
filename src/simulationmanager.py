@@ -58,23 +58,10 @@ class SimulationManager():
             if v.getName() not in allVehicles:
                 v.setInActive()
 
-        if self.intersections:
-            for inControl in self.intersections:
-                inControl.findAndAddReleventPlatoons(self.getActivePlatoons())
-                inControl.update()
+        for p in self.getActivePlatoons():
+            p.updateIsActive()
 
         if self.platoonCreation:
-            # Handles a single step of the simulation
-            # Update all active platoons in the scenario
-            for platoon in self.getActivePlatoons():
-                platoon.update()
-                if platoon.canMerge() and platoon.isActive():
-                    lead = platoon.getLeadVehicle().getLeader()
-                    if lead:
-                        leadPlatoon = self.getPlatoonByVehicle(lead[0])
-                        if leadPlatoon:
-                            leadPlatoon[0].mergePlatoon(platoon)
-            
             # See whether there are any vehicles that are not
             # in a platoon that should be in one
             vehiclesNotInPlatoons = [v for v in allVehicles if v not in self.getAllVehiclesInPlatoons()]
@@ -89,3 +76,21 @@ class SimulationManager():
                     possiblePlatoon.addVehicle(vehicle)
                 else:
                     self.createPlatoon([vehicle, ])
+
+        if self.intersections:
+            for inControl in self.intersections:
+                inControl.removeIrreleventPlatoons()
+                inControl.findAndAddReleventPlatoons(self.getActivePlatoons())
+                inControl.update()
+
+        if self.platoonCreation:
+            # Handles a single step of the simulation
+            # Update all active platoons in the scenario
+            for platoon in self.getActivePlatoons():
+                platoon.update()
+                if platoon.canMerge() and platoon.isActive():
+                    lead = platoon.getLeadVehicle().getLeader()
+                    if lead:
+                        leadPlatoon = self.getPlatoonByVehicle(lead[0])
+                        if leadPlatoon:
+                            leadPlatoon[0].mergePlatoon(platoon)
