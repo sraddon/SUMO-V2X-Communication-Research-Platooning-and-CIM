@@ -1,0 +1,7 @@
+<configuration>
+   <input>
+       <net-file value="A13NorthCircularRoundabout.net.xml"/>
+       <route-files value="A13NorthCircularRoundabout.rou.xml"/>
+	   <gui-settings-file value="gui.settings.xml"/>
+   </input>
+</configuration>

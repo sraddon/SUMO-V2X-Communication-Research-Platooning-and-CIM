@@ -1,7 +1,0 @@
-<configuration>
-   <input>
-       <net-file value="NormalRoundabout.net.xml"/>
-       <route-files value="NormalRoundabout.rou.xml"/>
-	   <gui-settings-file value="gui.settings.xml"/>
-   </input>
-</configuration>
