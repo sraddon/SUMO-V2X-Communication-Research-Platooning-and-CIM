@@ -23,23 +23,37 @@ class IntersectionController():
             platoon.addControlledLanes(self.lanesServed)
 
     def calculateNewReservedTime(self, pv, reservedTime):
+        """
+        Calculates the time that is needed to be reserved for a given platoon or vehicle (pv)
+        """
         # If this platoon is the first to post a reservation, the distance to the junction needs to be included
         if reservedTime == 0:
             lenThruJunc = self._getLanePosition(pv) + pv.getLength()
         else:
-            lenThruJunc = pv.getLength() * 3 if self.zip else 1
-        return 0.5 + reservedTime + (lenThruJunc / (pv.getSpeed() or 1))
+            lenThruJunc = pv.getLength() * 2 if self.zip else 1
+        return (0.5 if self.zip else 1.5) + reservedTime + (lenThruJunc / (pv.getSpeed() or 1))
 
     def _eligibleZippings(self, platoon):
-        for z in self.platoonZips:
-            if platoon.getLanePositionFromFront() - z[-1].getLanePositionFromFront() < 10:
+        if len(self.platoonZips) >= 1:
+            z = self.platoonZips[-1]
+            if platoon.getLanePositionFromFront() - z[-1].getLanePositionFromFront() < 10 and platoon.getLanePositionFromFront() - z[-1].getLanePositionFromFront() > 0:
                 return z
 
     def removeIrreleventPlatoons(self):
+        """
+        Function to remove any platoons from the intersection that have either left the sphere of influence or left the map
+        """
         # Check if we need to remove any before adding new ones to the controller
         for p in self.platoons:
             if not p.isActive() or all([l not in self.lanesServed for l in p.getLanesOfAllVehicles()]):
                 self.removePlatoon(p)
+                if self.zip:
+                    for zip in self.platoonZips:
+                        for platoon in zip:
+                            if platoon == p:
+                                zip.remove(platoon)
+                        if not zip:
+                            self.platoonZips.remove(zip)
 
     def findAndAddReleventPlatoons(self, platoons):
         """
@@ -54,10 +68,22 @@ class IntersectionController():
             if p.getLane() in self.lanesServed and p not in self.platoons:
                 self.addPlatoon(p)
 
-    def getVehicleOrderThroughJunc(self):
-        return flatten([self._zipPlatoons(z) for z in self.platoonZips])
+    def getVehicleZipOrderThroughJunc(self):
+        """
+        Gets the order that a platoon should [pass through the junction if zipping is enabled
+        """
+        def distSort(elem):
+            return elem.getLanePositionFromFront()
+
+        if self.zip:
+            prelimList = flatten([self._zipPlatoons(z) for z in self.platoonZips])
+            prelimList.sort(key=distSort)
+            return prelimList
 
     def _generatePlatoonZips(self):
+        """
+        Generates all the zips for the platoons in the scenario
+        """
         for p in self.platoons:
             if p not in self.platoonsZipped:
                 eligibleZipping = self._eligibleZippings(p)
@@ -78,6 +104,9 @@ class IntersectionController():
         return 1000
 
     def getNewSpeed(self, pv, reservedTime):
+        """
+        Gets the speed the platoon or vehicle should adhere to in order to pass through the intersection safely
+        """
         distanceToTravel = self._getLanePosition(pv)
         currentSpeed = pv.getSpeed()
         # If we are in the last 20 metres, we assume no more vehicles will join the platoon
@@ -93,10 +122,8 @@ class IntersectionController():
         elif currentSpeed == 0:
             speed = pv.getMaxSpeed()
         else:
-            pv.setSpeedMode(22)
-            speed = max([currentSpeed, 0.5])
+            return pv.getMaxSpeed()
         if reservedTime == 0:
-            pv.setSpeedMode(22)
             return pv.getMaxSpeed()
         return speed
 
@@ -119,26 +146,25 @@ class IntersectionController():
         2. Removes platoons that are no longer in the sphere of influence of the function
         3. Updates the speed of all platoons being managed by the controller.
         """
-        if len(self.platoons) > 1:
-            reservedTime = 0
-            if self.zip:
-                self._generatePlatoonZips()
-                for v in self.getVehicleOrderThroughJunc():
-                    if v.isActive() and v.getLane() in self.lanesServed:
-                        speed = self.getNewSpeed(v, reservedTime)
-                        v.setSpeed(speed)
-                        reservedTime = self.calculateNewReservedTime(v, reservedTime)
-            else:
-                for p in self.platoons:
-                    # Update the speeds of the platoon if it has not passed the junction
-                    if p.getLane() in self.lanesServed:
-                        speed = self.getNewSpeed(p, reservedTime)
-                        if speed == -1:
-                            p.removeTargetSpeed()
-                        else:
-                            p.setTargetSpeed(speed)
-                        reservedTime = self.calculateNewReservedTime(p, reservedTime)
-            self._logIntersectionStatus(reservedTime)
+        reservedTime = 0
+        if self.zip:
+            self._generatePlatoonZips()
+            for v in self.getVehicleZipOrderThroughJunc():
+                if v.isActive() and v.getLane() in self.lanesServed:
+                    speed = self.getNewSpeed(v, reservedTime)
+                    v.setSpeed(speed)
+                    reservedTime = self.calculateNewReservedTime(v, reservedTime)
+        else:
+            for p in self.platoons:
+                # Update the speeds of the platoon if it has not passed the junction
+                if p.getLane() in self.lanesServed:
+                    speed = self.getNewSpeed(p, reservedTime)
+                    if speed == -1:
+                        p.removeTargetSpeed()
+                    else:
+                        p.setTargetSpeed(speed)
+                    reservedTime = self.calculateNewReservedTime(p, reservedTime)
+        self._logIntersectionStatus(reservedTime)
 
     def _logIntersectionStatus(self, reservation=None):
         """
@@ -147,12 +173,13 @@ class IntersectionController():
         if self.platoons:
             logging.info("------------%s Information------------", self.name)
             if self.zip:
-                for p in self.platoons:
-                    logging.info("------Platoon: %s------", p.getID())
-                    for v in p.getAllVehicles():
-                        if v.isActive():
-                            setSpeed = v._previouslySetValues['setSpeed'] if 'setSpeed' in v._previouslySetValues else "None"
-                            logging.info("Vehicle: %s, Target: %s, Current: %s", v.getName(), setSpeed, v.getSpeed())
+                for v in self.getVehicleZipOrderThroughJunc():
+                    if v.isActive():
+                        setSpeed = v._previouslySetValues['setSpeed'] if 'setSpeed' in v._previouslySetValues else "None"
+                        logging.info("Vehicle: %s, Target: %s, Current: %s", v.getName(), setSpeed, v.getSpeed())
+                logging.info("------------Platoon Zips------------")
+                for zip in self.platoonZips:
+                    logging.info("Zip: %s", [p.getID() for p in zip])
             else:
                 for p in self.platoons:
                     logging.info("Platoon: %s, Target: %s, Current: %s ", p.getID(), p.getTargetSpeed(), p.getSpeed())
@@ -160,10 +187,14 @@ class IntersectionController():
                 logging.info("Total time reserved: %s", reservation)
 
     def _zipPlatoons(self, platoons):
+        """
+        Zips all the vehicles in the given platoons into one continuous set
+        """
         ret = []
         iterations = max([len(p.getAllVehicles()) for p in platoons])
         for i in range(0, iterations):
             for p in platoons:
                 if len(p.getAllVehicles()) > i:
-                    ret.append(p.getAllVehicles()[i])
+                    if p.getAllVehicles()[i].getLane() in self.lanesServed:
+                        ret.append(p.getAllVehicles()[i])
         return ret
