@@ -13,6 +13,7 @@
     <flow id="A13WestNCNorth" type="normal_car" begin="0" end="5000" number="800" from="A13WestIn" to="NCNorthOut" departPos="last" departLane="best" />
     <flow id="A13EastNCNorth" type="normal_car" begin="0" end="5000" number="800" from="A13EastIn" to="NCNorthOut" departPos="last" departLane="best" />
 
+    <flow id="A13WestNCSouth" type="normal_car" begin="0" end="5000" number="500" from="A13WestIn" to="NCSouthOut" departPos="last" departLane="best" />
     <flow id="A13EastNCSouth" type="normal_car" begin="0" end="5000" number="500" from="A13EastIn" to="NCSouthOut" departPos="last" departLane="best" />
 
     <flow id="NCSouthA13West" type="normal_car" begin="0" end="5000" number="200" from="NCSouthIn" to="A13WestOut" departPos="last" departLane="best" />
