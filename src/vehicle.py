@@ -10,7 +10,6 @@ class Vehicle():
         self._name = vehicle
         self._route = traci.vehicle.getRoute(vehicle)
         self._previouslySetValues = dict()
-        self._speedMode = traci.vehicle.getSpeedMode(vehicle)
 
     def getAcceleration(self):
         return self._acceleration
@@ -67,7 +66,7 @@ class Vehicle():
         self._setAttr("setMinGap", minGap)
 
     def setTargetLane(self, lane):
-        traci.vehicle.changeLane(self.getName(), lane, 10)
+        traci.vehicle.changeLane(self.getName(), lane, 0.5)
 
     def setTau(self, tau):
         self._setAttr("setTau", tau)
