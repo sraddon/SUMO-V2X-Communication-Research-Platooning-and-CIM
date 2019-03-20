@@ -42,7 +42,7 @@ class Platoon():
         # vehicle into the next edge
         leadVehicleRoute = self.getLeadVehicle().getRemainingRoute()
         if len(leadVehicleRoute) > 1:
-            leadVehicleNextEdge = leadVehicleRoute[0]
+            leadVehicleNextEdge = leadVehicleRoute[1]
             for vehicle in vehicles:
                 if leadVehicleNextEdge not in vehicle.getRoute():
                     return False
@@ -78,8 +78,13 @@ class Platoon():
     def getLanesOfAllVehicles(self):
         return [v.getLane() for v in self.getAllVehicles() if v.isActive()]
 
-    def getLanePositionFromFront(self):
-        return traci.lane.getLength(self._lane) - self._lanePosition
+    def getLanePositionFromFront(self, lane=None):
+        if lane:
+            vehiclesInLane = [v for v in self.getAllVehicles() if v.getLane() == lane]
+            if vehiclesInLane:
+                return traci.lane.getLength(lane) - vehiclesInLane[0].getLanePositionFromFront()
+        else:
+            return traci.lane.getLength(self._lane) - self._lanePosition
 
     def getLeadVehicle(self):
         return self._vehicles[0]
@@ -204,7 +209,8 @@ class Platoon():
             if self._targetSpeed != -1:
                 self._updateSpeed(self._targetSpeed)
             else:
-                self.getLeadVehicle().setSpeed(-1)
+                if self.getLeadVehicle().getLane() not in self._controlledLanes:
+                    self.getLeadVehicle().setSpeed(-1)
                 self._updateSpeed(self._currentSpeed, False)
 
             # Route updates
