@@ -93,7 +93,6 @@ class Platoon():
         """ Gets the total length of the platoon
             Done by taking the distance between the vehicle's front
             bumper and the end of the lane
-            TODO: deal with vehicles being across two edges
         """
         laneLen = traci.lane.getLength(self._lane)
         front = laneLen - self.getLeadVehicle().getLanePosition()

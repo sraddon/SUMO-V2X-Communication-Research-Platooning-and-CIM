@@ -13,6 +13,7 @@ class SimulationManager():
         self.platoons = list()
         self.platoonCreation = pCreation
         self.vehicles = list()
+        self.maxStoppedVehicles = dict()
         if iCoordination:
             for intersection in traci.trafficlights.getIDList():
                 controller = IntersectionController(intersection, iZipping)
@@ -54,9 +55,24 @@ class SimulationManager():
     def handleSimulationStep(self):
         allVehicles = traci.vehicle.getIDList()
         # Check mark vehicles as in-active if they are outside the map
+        stoppedCount = dict()
         for v in self.vehicles:
             if v.getName() not in allVehicles:
                 v.setInActive()
+            # Get information concerning the number of vehicles queueing on each lane
+            if v.isActive() and v.getSpeed() == 0:
+                lane = v.getEdge()
+                if lane in stoppedCount:
+                    stoppedCount[lane] = stoppedCount[lane] + 1
+                else:
+                    stoppedCount[lane] = 1
+
+        for lane in stoppedCount:
+            if lane in self.maxStoppedVehicles:
+                if stoppedCount[lane] > self.maxStoppedVehicles[lane]:
+                    self.maxStoppedVehicles[lane] = stoppedCount[lane]
+            else:
+                self.maxStoppedVehicles[lane] = stoppedCount[lane]
 
         for p in self.getActivePlatoons():
             p.updateIsActive()
