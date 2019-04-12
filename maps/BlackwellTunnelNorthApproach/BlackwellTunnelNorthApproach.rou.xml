@@ -1,5 +1,5 @@
 <routes>
-    <vType id="normal_car" vClass="passenger" departspeed="max" departPos="last" maxSpeed="30" speedFactor="0.9" speedDev="0.1" sigma="0"/>
+    <vType id="normal_car" vClass="passenger" departspeed="max" departPos="last" maxSpeed="30" speedFactor="1.0" speedDev="0.0" sigma="0"/>
 
     <flow id="MainA12South" type="normal_car" begin="0" end="5000" number="1000" from="A12SouthIn" to="A12NorthOut" departPos="last" departLane="best" />
     <flow id="MainA12North" type="normal_car" begin="0" end="5000" number="1000" from="A12NorthIn" to="A12SouthOut" departPos="last" departLane="best" />
