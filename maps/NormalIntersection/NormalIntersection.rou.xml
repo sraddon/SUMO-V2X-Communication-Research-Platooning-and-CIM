@@ -1,5 +1,5 @@
 <routes>
-    <vType id="normal_car" vClass="passenger" departspeed="0" departPos="last" maxSpeed="30" speedFactor="0.9" speedDev="0.1" sigma="0"/>
+    <vType id="normal_car" vClass="passenger" departspeed="0" departPos="last" maxSpeed="30" speedFactor="1.0" speedDev="0.0" sigma="0"/>
     <flow id="downflow" type="normal_car" begin="0" end="5000" number="500" from="upin" to="downout" departPos="last" departLane="random" />
     <flow id="upflow" type="normal_car" begin="0" end="5000" number="500" from="downin" to="upout" departPos="last" departLane="random" />
     <flow id="rightflow" type="normal_car" begin="0" end="5000" number="500" from="leftin" to="rightout" departPos="last" departLane="random" />
