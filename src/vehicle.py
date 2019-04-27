@@ -81,6 +81,8 @@ class Vehicle():
         self._setAttr("setSpeedFactor", speedFactor)
 
     def _setAttr(self, attr, arg):
+        # Only set an attribute if the value is different from the previous value set
+        # This improves performance
         if self.isActive():
             if attr in self._previouslySetValues:
                 if self._previouslySetValues[attr] == arg:

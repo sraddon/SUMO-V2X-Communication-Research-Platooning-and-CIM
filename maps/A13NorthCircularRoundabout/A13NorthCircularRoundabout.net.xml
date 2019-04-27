@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 04/11/19 15:55:06 by Eclipse SUMO netedit Version 1.0.1
+<!-- generated on 04/24/19 18:19:12 by Eclipse SUMO netedit Version 1.0.1
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
@@ -89,10 +89,10 @@
         <lane id=":132458_0_3" index="3" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="12.82" length="21.00" shape="976.13,921.96 973.10,918.59 971.07,914.44 970.04,909.51 970.01,903.80"/>
     </edge>
     <edge id=":132458_4" function="internal">
-        <lane id=":132458_4_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="22.35" length="21.27" shape="953.54,921.23 956.39,916.11 958.38,912.54 959.67,908.77 960.44,903.06"/>
-        <lane id=":132458_4_1" index="1" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="22.35" length="21.27" shape="956.51,922.47 959.48,917.07 961.53,913.30 962.84,909.32 963.63,903.30"/>
-        <lane id=":132458_4_2" index="2" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="22.35" length="21.27" shape="959.47,923.70 962.58,918.04 964.68,914.06 966.01,909.87 966.82,903.55"/>
-        <lane id=":132458_4_3" index="3" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="22.35" length="21.27" shape="959.47,923.70 963.17,917.95 966.35,914.21 968.72,910.24 970.01,903.80"/>
+        <lane id=":132458_4_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="22.35" length="21.40" shape="953.54,921.23 956.39,916.11 958.38,912.54 959.67,908.77 960.44,903.06"/>
+        <lane id=":132458_4_1" index="1" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="22.35" length="21.40" shape="953.54,921.23 957.00,916.02 960.05,912.69 962.38,909.15 963.63,903.30"/>
+        <lane id=":132458_4_2" index="2" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="22.35" length="21.40" shape="956.51,922.47 960.08,916.98 963.20,913.45 965.55,909.69 966.82,903.55"/>
+        <lane id=":132458_4_3" index="3" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="22.35" length="21.40" shape="959.47,923.70 963.17,917.95 966.35,914.21 968.72,910.24 970.01,903.80"/>
     </edge>
     <edge id=":132468_0" function="internal">
         <lane id=":132468_0_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="22.35" length="38.58" shape="823.45,954.15 827.66,965.51 830.33,974.24 833.77,981.44 840.33,988.19"/>
@@ -717,10 +717,10 @@
     </edge>
 
     <tlLogic id="132458" type="static" programID="0" offset="0">
-        <phase duration="60" state="rrrrGGGG"/>
-        <phase duration="5"  state="rrrryyyy"/>
         <phase duration="60" state="GGGGrrrr"/>
         <phase duration="5"  state="yyyyrrrr"/>
+        <phase duration="60" state="rrrrGGGG"/>
+        <phase duration="5"  state="rrrryyyy"/>
     </tlLogic>
     <tlLogic id="132469" type="static" programID="0" offset="0">
         <phase duration="40" state="GGGGGrrrrr"/>
@@ -734,7 +734,7 @@
         <phase duration="15" state="rrrrrGGGGG"/>
         <phase duration="5"  state="rrrrryyyyy"/>
     </tlLogic>
-    <tlLogic id="cluster_132459_4486506802" type="static" programID="0" offset="20">
+    <tlLogic id="cluster_132459_4486506802" type="static" programID="0" offset="30">
         <phase duration="60" state="rrrrrGGGGG"/>
         <phase duration="5"  state="yyyyyyyyyy"/>
         <phase duration="60" state="GGGGGrrrrr"/>
@@ -1042,8 +1042,8 @@
     <connection from="WestRoadIn2" to="WestRoadIn1" fromLane="1" toLane="2" via=":135505047_0_2" dir="s" state="M"/>
     <connection from="WestRoadIn2" to="WestRoadIn1" fromLane="1" toLane="3" via=":135505047_0_3" dir="s" state="M"/>
     <connection from="WestSection" to="23652093" fromLane="0" toLane="0" via=":132458_4_0" tl="132458" linkIndex="4" dir="s" state="O"/>
-    <connection from="WestSection" to="23652093" fromLane="1" toLane="1" via=":132458_4_1" tl="132458" linkIndex="5" dir="s" state="O"/>
-    <connection from="WestSection" to="23652093" fromLane="2" toLane="2" via=":132458_4_2" tl="132458" linkIndex="6" dir="s" state="O"/>
+    <connection from="WestSection" to="23652093" fromLane="0" toLane="1" via=":132458_4_1" tl="132458" linkIndex="5" dir="s" state="O"/>
+    <connection from="WestSection" to="23652093" fromLane="1" toLane="2" via=":132458_4_2" tl="132458" linkIndex="6" dir="s" state="O"/>
     <connection from="WestSection" to="23652093" fromLane="2" toLane="3" via=":132458_4_3" tl="132458" linkIndex="7" dir="s" state="O"/>
     <connection from="gneE0" to="14177259#0" fromLane="0" toLane="1" via=":135496537_2_0" dir="l" state="m"/>
 

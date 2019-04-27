@@ -2,7 +2,6 @@ import traci
 import logging
 from src.simlib import flatten
 
-
 class IntersectionController():
 
     def __init__(self, intersection, zip=True):

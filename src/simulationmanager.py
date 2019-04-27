@@ -3,7 +3,6 @@ from src.platoon import Platoon
 from src.vehicle import Vehicle
 from src.simlib import flatten
 
-
 import traci
 
 class SimulationManager():
@@ -67,6 +66,7 @@ class SimulationManager():
                 else:
                     stoppedCount[lane] = 1
 
+        # Gather statistics for amount of vehicles stopped per lane
         for lane in stoppedCount:
             if lane in self.maxStoppedVehicles:
                 if stoppedCount[lane] > self.maxStoppedVehicles[lane]:
@@ -74,6 +74,7 @@ class SimulationManager():
             else:
                 self.maxStoppedVehicles[lane] = stoppedCount[lane]
 
+        # Update all platoons active status
         for p in self.getActivePlatoons():
             p.updateIsActive()
 
@@ -93,6 +94,8 @@ class SimulationManager():
                 else:
                     self.createPlatoon([vehicle, ])
 
+        # If we're doing intersection management, update each controller and add any new platoons into their
+        # control
         if self.intersections:
             for inControl in self.intersections:
                 inControl.removeIrreleventPlatoons()

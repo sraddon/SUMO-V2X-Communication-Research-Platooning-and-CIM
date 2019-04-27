@@ -35,6 +35,9 @@ class Platoon():
                      vehicle.getName(), self.getID(), len(self._vehicles))
 
     def canMerge(self):
+        """
+        Returns True if this platoon can currently merge with another
+        """
         return self._eligibleForMerging
 
     def checkVehiclePathsConverge(self, vehicles):
@@ -128,6 +131,10 @@ class Platoon():
         platoon._eligibleForMerging = False
 
     def removeControlledLanes(self, lanes):
+        """
+        Removes the lanes from the platoon that were previously being controlled by an
+        intersection controller.
+        """
         for lane in lanes:
             self._controlledLanes.remove(lane)
 
@@ -138,13 +145,28 @@ class Platoon():
         self._targetSpeed = -1
 
     def setTargetSpeed(self, speed):
+        """
+        Sets a manual target speed for this platoon (normally determined by the lead
+        vehicle but this will override it). This will remain until removeTargetSpeed
+        is called.
+        """
         self._targetSpeed = speed
 
     def setGap(self, gap):
+        """
+        Set the gap between vehicles in the platoon
+        """
         for veh in self.getAllVehicles():
             veh.setTau(gap)
 
     def setSpeedMode(self, speedMode):
+        """
+        Set the speed mode for every vehicle in the platoon.
+        Speed mode is a SUMO function that allows different behaviour once the setSpeed
+        function has been called. Including ignoring safe speed threholds and junctions.
+        Used here so that vehicles don't brake unncessarily when closing distances are tight
+        during CIM.
+        """
         for v in self.getAllVehicles():
             v.setSpeedMode(speedMode)
 

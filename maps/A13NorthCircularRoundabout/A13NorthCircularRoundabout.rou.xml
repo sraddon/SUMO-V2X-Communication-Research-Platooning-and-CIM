@@ -1,22 +1,20 @@
 <routes>
-    <vType id="normal_car" vClass="passenger" departspeed="max" departPos="last" maxSpeed="30" speedFactor="1.0" speedDev="0.0" sigma="0"/>
+  <vType id="normal_car" vClass="passenger" departspeed="max"/>
 
-    <flow id="MainNCSouth" type="normal_car" begin="0" end="5000" number="100" from="NCSouthIn" to="NCNorthOut" departPos="last" departLane="best" />
-    <flow id="MainNCNorth" type="normal_car" begin="0" end="5000" number="100" from="NCNorthIn" to="NCSouthOut" departPos="last" departLane="best" />
+  <flow id="MainNCSouth" type="normal_car" begin="0" end="5000" vehsPerHour="100" from="NCSouthIn" to="NCNorthOut" departPos="last" departLane="best" />
+  <flow id="NCSouthA13West" type="normal_car" begin="0" end="5000" vehsPerHour="200" from="NCSouthIn" to="A13WestOut" departPos="last" departLane="best" />
+  <flow id="NCSouthA13East" type="normal_car" begin="0" end="5000" vehsPerHour="200" from="NCSouthIn" to="A13EastOut" departPos="last" departLane="best" />
 
-    <flow id="MainA13East" type="normal_car" begin="0" end="5000" number="1000" from="A13EastIn" to="A13WestOut" departPos="last" departLane="best" />
-    <flow id="MainA13West" type="normal_car" begin="0" end="5000" number="1000" from="A13WestIn" to="A13EastOut" departPos="last" departLane="best" />
+  <flow id="MainNCNorth" type="normal_car" begin="0" end="5000" vehsPerHour="500" from="NCNorthIn" to="NCSouthOut" departPos="last" departLane="best" />
+  <flow id="NCNorthA13West" type="normal_car" begin="0" end="5000" vehsPerHour="1200" from="NCNorthIn" to="A13WestOut" departPos="last" departLane="best" />
+  <flow id="NCNorthA13East" type="normal_car" begin="0" end="5000" vehsPerHour="1000" from="NCNorthIn" to="A13EastOut" departPos="last" departLane="best" />
 
-    <flow id="NCNorthA13West" type="normal_car" begin="0" end="5000" number="1000" from="NCNorthIn" to="A13WestOut" departPos="last" departLane="best" />
-    <flow id="NCNorthA13East" type="normal_car" begin="0" end="5000" number="1000" from="NCNorthIn" to="A13EastOut" departPos="last" departLane="best" />
+  <flow id="MainA13East" type="normal_car" begin="0" end="5000" vehsPerHour="3800" from="A13EastIn" to="A13WestOut" departPos="last" departLane="best" />
+  <flow id="A13EastNCNorth" type="normal_car" begin="0" end="5000" vehsPerHour="1000" from="A13EastIn" to="NCNorthOut" departPos="last" departLane="best" />
+  <flow id="A13EastNCSouth" type="normal_car" begin="0" end="5000" vehsPerHour="400" from="A13EastIn" to="NCSouthOut" departPos="last" departLane="best" />
 
-    <flow id="A13WestNCNorth" type="normal_car" begin="0" end="5000" number="800" from="A13WestIn" to="NCNorthOut" departPos="last" departLane="best" />
-    <flow id="A13EastNCNorth" type="normal_car" begin="0" end="5000" number="800" from="A13EastIn" to="NCNorthOut" departPos="last" departLane="best" />
-
-    <flow id="A13WestNCSouth" type="normal_car" begin="0" end="5000" number="100" from="A13WestIn" to="NCSouthOut" departPos="last" departLane="best" />
-    <flow id="A13EastNCSouth" type="normal_car" begin="0" end="5000" number="100" from="A13EastIn" to="NCSouthOut" departPos="last" departLane="best" />
-
-    <flow id="NCSouthA13West" type="normal_car" begin="0" end="5000" number="200" from="NCSouthIn" to="A13WestOut" departPos="last" departLane="best" />
-    <flow id="NCSouthA13East" type="normal_car" begin="0" end="5000" number="200" from="NCSouthIn" to="A13EastOut" departPos="last" departLane="best" />
+  <flow id="MainA13West" type="normal_car" begin="0" end="5000" vehsPerHour="1800" from="A13WestIn" to="A13EastOut" departPos="last" departLane="best" />
+  <flow id="A13WestNCNorth" type="normal_car" begin="0" end="5000" vehsPerHour="1000" from="A13WestIn" to="NCNorthOut" departPos="last" departLane="best" />
+  <flow id="A13WestNCSouth" type="normal_car" begin="0" end="5000" vehsPerHour="600" from="A13WestIn" to="NCSouthOut" departPos="last" departLane="best" />
 
 </routes>

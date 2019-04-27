@@ -1,27 +1,26 @@
 <routes>
-    <vType id="normal_car" vClass="passenger" departspeed="max" departPos="last" maxSpeed="30" speedFactor="1.0" speedDev="0.0" sigma="0"/>
+  <vType id="normal_car" vClass="passenger" departspeed="max"/>
 
-    <flow id="MainA12South" type="normal_car" begin="0" end="5000" number="1000" from="A12SouthIn" to="A12NorthOut" departPos="last" departLane="best" />
-    <flow id="MainA12North" type="normal_car" begin="0" end="5000" number="1000" from="A12NorthIn" to="A12SouthOut" departPos="last" departLane="best" />
+  <flow id="MainA12South" type="normal_car" begin="0" end="5000" vehsPerHour="1900" from="A12SouthIn" to="A12NorthOut" departPos="last" departLane="best" />
+  <flow id="A12SouthA13" type="normal_car" begin="0" end="5000" vehsPerHour="500" from="A12SouthIn" to="A13Out" departPos="last" departLane="best" />
+  <flow id="A12SouthNew" type="normal_car" begin="0" end="5000" vehsPerHour="100" from="A12SouthIn" to="NewOut" departPos="last" departLane="best" />
+  <flow id="A12SouthRound" type="normal_car" begin="0" end="5000" vehsPerHour="500" from="A12SouthIn" to="RoundOut" departPos="last" departLane="best" />
 
-    <flow id="NewA13" type="normal_car" begin="0" end="5000" number="50" from="NewIn" to="A13Out" departPos="last" departLane="best" />
-    <flow id="A13New" type="normal_car" begin="0" end="5000" number="500" from="A13In" to="NewOut" departPos="last" departLane="best" />
+  <flow id="MainA12North" type="normal_car" begin="0" end="5000" vehsPerHour="1700" from="A12NorthIn" to="A12SouthOut" departPos="last" departLane="best" />
+  <flow id="A12NorthA13" type="normal_car" begin="0" end="5000" vehsPerHour="450" from="A12NorthIn" to="A13Out" departPos="last" departLane="best" />
+  <flow id="A12NorthNew" type="normal_car" begin="0" end="5000" vehsPerHour="100" from="A12NorthIn" to="NewOut" departPos="last" departLane="best" />
+  <flow id="A12NorthRound" type="normal_car" begin="0" end="5000" vehsPerHour="450" from="A12NorthIn" to="RoundOut" departPos="last" departLane="best" />
 
-    <flow id="RoundInA12North" type="normal_car" begin="0" end="5000" number="500" from="RoundIn" to="A12NorthOut" departPos="last" departLane="best" />
-    <flow id="RoundInA12South" type="normal_car" begin="0" end="5000" number="500" from="RoundIn" to="A12SouthOut" departPos="last" departLane="best" />
+  <flow id="NewA13" type="normal_car" begin="0" end="5000" vehsPerHour="150" from="NewIn" to="A13Out" departPos="last" departLane="best" />
+  <flow id="NewRound" type="normal_car" begin="0" end="5000" vehsPerHour="150" from="NewIn" to="RoundOut" departPos="last" departLane="best" />
 
-    <flow id="A13A12North" type="normal_car" begin="0" end="5000" number="500" from="A13In" to="A12NorthOut" departPos="last" departLane="best" />
-    <flow id="A13A12South" type="normal_car" begin="0" end="5000" number="500" from="A13In" to="A12SouthOut" departPos="last" departLane="best" />
+  <flow id="A13New" type="normal_car" begin="0" end="5000" vehsPerHour="300" from="A13In" to="NewOut" departPos="last" departLane="best" />
+  <flow id="A13A12North" type="normal_car" begin="0" end="5000" vehsPerHour="550" from="A13In" to="A12NorthOut" departPos="last" departLane="best" />
+  <flow id="A13A12South" type="normal_car" begin="0" end="5000" vehsPerHour="550" from="A13In" to="A12SouthOut" departPos="last" departLane="best" />
 
-    <flow id="A12NorthA13" type="normal_car" begin="0" end="5000" number="500" from="A12NorthIn" to="A13Out" departPos="last" departLane="best" />
-    <flow id="A12SouthA13" type="normal_car" begin="0" end="5000" number="500" from="A12SouthIn" to="A13Out" departPos="last" departLane="best" />
-
-    <flow id="A12NorthNew" type="normal_car" begin="0" end="5000" number="50" from="A12NorthIn" to="NewOut" departPos="last" departLane="best" />
-    <flow id="A12SouthNew" type="normal_car" begin="0" end="5000" number="50" from="A12SouthIn" to="NewOut" departPos="last" departLane="best" />
-
-    <flow id="A12NorthRound" type="normal_car" begin="0" end="5000" number="50" from="A12NorthIn" to="RoundOut" departPos="last" departLane="best" />
-    <flow id="A12SouthRound" type="normal_car" begin="0" end="5000" number="50" from="A12SouthIn" to="RoundOut" departPos="last" departLane="best" />
-
-    <flow id="NewRound" type="normal_car" begin="0" end="5000" number="50" from="NewIn" to="RoundOut" departPos="last" departLane="best" />
+  <flow id="RoundInA12North" type="normal_car" begin="0" end="5000" vehsPerHour="300" from="RoundIn" to="A12NorthOut" departPos="last" departLane="best" />
+  <flow id="RoundInA12South" type="normal_car" begin="0" end="5000" vehsPerHour="300" from="RoundIn" to="A12SouthOut" departPos="last" departLane="best" />
+  <flow id="RoundInNew" type="normal_car" begin="0" end="5000" vehsPerHour="50" from="RoundIn" to="NewOut" departPos="last" departLane="best" />
+  <flow id="RoundInA13" type="normal_car" begin="0" end="5000" vehsPerHour="150" from="RoundIn" to="A13Out" departPos="last" departLane="best" />
 
 </routes>

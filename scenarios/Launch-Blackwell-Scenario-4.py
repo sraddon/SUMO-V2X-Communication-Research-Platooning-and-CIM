@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from src.simulationmanager import SimulationManager
 from src.simlib import setUpSimulation
 
-setUpSimulation("maps/BlackwellTunnelNorthApproach_no_TLS/BlackwellTunnelNorthApproach_no_TLS.sumocfg", 2)
+setUpSimulation("maps/BlackwellTunnelNorthApproach_no_TLS/BlackwellTunnelNorthApproach_no_TLS.sumocfg", 1)
 step = 0
 manager = SimulationManager()
 while step < 5000:

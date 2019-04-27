@@ -6,7 +6,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from src.simulationmanager import SimulationManager
 from src.simlib import setUpSimulation
 
-setUpSimulation("maps/BlackwellTunnelNorthApproach/BlackwellTunnelNorthApproach.sumocfg", 2)
+setUpSimulation("maps/BlackwellTunnelNorthApproach/BlackwellTunnelNorthApproach.sumocfg", 1)
 step = 0
 manager = SimulationManager(True, False)
 maxNumAtTrafficLights = 0
