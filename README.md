@@ -17,6 +17,8 @@ To start using the project it is relatively simple
 2. Install [SUMO](https://sumo.dlr.de/wiki/Installing), make sure you tick the box to add SUMO to your system path during installation
 3. Clone this repository into a local area.
 4. Run any of the scenarios from the scenarios folder either by double clicking them or using the command prompt (ex. python Launch-Intersection-Scenario-1.py)
+5. Explore the code base! I've tried to make it quite well documented within the code and I'd recommend reading in this order: scenario file ----> simulation manager ---> vehicle ---> platoon ---> intersection controller
+
 Any Python compatible IDE can be used to edit the project, I used Visual Studio but there are plenty others!
 More information about the different scenarios and how they work are below.
 
