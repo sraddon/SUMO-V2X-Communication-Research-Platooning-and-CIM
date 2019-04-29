@@ -8,13 +8,15 @@ This has been implemented using a combination of SUMO and TraCI (python).
 SUMO is a urban traffic simulator and more information can be found about it [ here ](https://sumo.dlr.de/wiki/Simulation_of_Urban_MObility_-_Wiki)
 TraCI is a way of manually viewing information about a SUMO simulation and changing how it behaves while it is running using python (more information [here](https://sumo.dlr.de/wiki/TraCI))
 
+Feel free to build/learn off this and if you have any questions, let me know.
+
 ## Getting Started
 To start using the project it is relatively simple
 
 1. Install [Python](https://www.python.org/), make sure you tick the box to add python to your system path during installation
 2. Install [SUMO](https://sumo.dlr.de/wiki/Installing), make sure you tick the box to add SUMO to your system path during installation
 3. Clone this repository into a local area.
-4. Run any of the scenarios from the scenarios folder either by double clicking them or using the command prompt (python <filename>.py)
+4. Run any of the scenarios from the scenarios folder either by double clicking them or using the command prompt (ex. python Launch-Intersection-Scenario-1.py)
 Any Python compatible IDE can be used to edit the project, I used Visual Studio but there are plenty others!
 More information about the different scenarios and how they work are below.
 
