@@ -4,7 +4,7 @@ import traci
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from src.simlib import setUpSimulation
 
-setUpSimulation("maps/BlackwellTunnelNorthApproach/BlackwellTunnelNorthApproach.sumocfg")
+setUpSimulation("../maps/BlackwellTunnelNorthApproach/BlackwellTunnelNorthApproach.sumocfg")
 step = 0
 while step < 5000:
     traci.simulationStep()

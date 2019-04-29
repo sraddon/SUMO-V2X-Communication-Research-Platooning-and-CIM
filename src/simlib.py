@@ -16,5 +16,5 @@ def setUpSimulation(configFile, trafficScale = 1):
     root.setLevel(logging.DEBUG)
 
     # Start Simulation and step through
-    traci.start([sumoBinary, "-c", configFile, "--step-length", "0.1", "--collision.action", "none", "--start", "--amitran-output", "output/amitran.xml",
-                 "--additional-files", "output/additional.xml", "--duration-log.statistics", "--scale", str(trafficScale)])
+    traci.start([sumoBinary, "-c", configFile, "--step-length", "0.1", "--collision.action", "none", "--start",
+                 "--additional-files", "../output/additional.xml", "--duration-log.statistics", "--scale", str(trafficScale)])

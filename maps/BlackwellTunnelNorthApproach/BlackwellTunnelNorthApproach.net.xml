@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 04/24/19 17:41:56 by Eclipse SUMO netedit Version 1.0.1
+<!-- generated on 04/29/19 17:18:57 by Eclipse SUMO netedit Version 1.0.1
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
@@ -390,17 +390,6 @@
             <param key="origId" value="204036496"/>
         </lane>
     </edge>
-    <edge id="204039616" from="440396065" to="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" name="East India Dock Road" priority="11" type="highway.trunk" spreadType="center" shape="350.62,1378.34 391.88,1383.07">
-        <lane id="204039616_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="42.11" shape="352.24,1381.75 394.27,1386.56">
-            <param key="origId" value="204039616"/>
-        </lane>
-        <lane id="204039616_1" index="1" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="42.11" shape="352.60,1378.57 394.44,1383.36">
-            <param key="origId" value="204039616"/>
-        </lane>
-        <lane id="204039616_2" index="2" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="42.11" shape="352.96,1375.39 394.62,1380.16">
-            <param key="origId" value="204039616"/>
-        </lane>
-    </edge>
     <edge id="204039621" from="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" to="440395986" name="East India Dock Road" priority="11" type="highway.trunk" spreadType="center" shape="449.78,1374.38 489.72,1382.38 657.15,1440.77">
         <lane id="204039621_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="217.92" shape="449.47,1375.95 489.30,1383.93 656.49,1442.24">
             <param key="origId" value="204039621"/>
@@ -414,14 +403,6 @@
             <param key="origId" value="204040187"/>
         </lane>
         <lane id="204040187#0_1" index="1" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="62.94" shape="365.58,1598.81 367.69,1535.90">
-            <param key="origId" value="204040187"/>
-        </lane>
-    </edge>
-    <edge id="204040187#1" from="2142198200" to="440398340" name="Blackwall Tunnel Northern Approach" priority="11" type="highway.trunk" spreadType="center" shape="369.29,1535.84 369.22,1518.80 369.28,1494.46 370.01,1476.63">
-        <lane id="204040187#1_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="46.98" shape="370.89,1535.72 370.82,1518.80 370.88,1494.49 371.11,1488.81">
-            <param key="origId" value="204040187"/>
-        </lane>
-        <lane id="204040187#1_1" index="1" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="46.98" shape="367.69,1535.73 367.62,1518.80 367.68,1494.43 367.92,1488.68">
             <param key="origId" value="204040187"/>
         </lane>
     </edge>
@@ -559,21 +540,21 @@
         <lane id="A12MergeOnNorth2_0" index="0" speed="13.89" length="164.08" shape="297.14,1373.01 293.78,1393.90 291.77,1422.50 293.20,1463.00 297.78,1491.04 305.84,1525.01 311.23,1535.10"/>
         <lane id="A12MergeOnNorth2_1" index="1" speed="13.89" length="164.08" shape="300.30,1373.52 296.96,1394.27 294.98,1422.55 296.39,1462.69 300.92,1490.41 308.86,1523.87 314.06,1533.60"/>
     </edge>
-    <edge id="A12MergeOnSouth" from="gneJ28" to="gneJ13" priority="-1">
-        <lane id="A12MergeOnSouth_0" index="0" speed="13.89" length="81.93" shape="499.02,1223.69 493.34,1141.95"/>
-        <lane id="A12MergeOnSouth_1" index="1" speed="13.89" length="81.93" shape="495.83,1223.91 490.15,1142.18"/>
+    <edge id="A12MergeSouth2Ona" from="gneJ28" to="gneJ13" priority="-1">
+        <lane id="A12MergeSouth2Ona_0" index="0" speed="13.89" length="81.93" shape="499.02,1223.69 493.34,1141.95"/>
+        <lane id="A12MergeSouth2Ona_1" index="1" speed="13.89" length="81.93" shape="495.83,1223.91 490.15,1142.18"/>
     </edge>
-    <edge id="A12MergeOnSouth2" from="cluster_2140465345_2140484926_440400188" to="gneJ28" priority="-1">
-        <lane id="A12MergeOnSouth2_0" index="0" speed="13.89" length="144.51" shape="509.11,1368.15 499.04,1223.99"/>
-        <lane id="A12MergeOnSouth2_1" index="1" speed="13.89" length="144.51" shape="505.92,1368.37 495.85,1224.21"/>
+    <edge id="A12MergeSouth2Onb" from="cluster_2140465345_2140484926_440400188" to="gneJ28" priority="-1">
+        <lane id="A12MergeSouth2Onb_0" index="0" speed="13.89" length="144.51" shape="509.11,1368.15 499.04,1223.99"/>
+        <lane id="A12MergeSouth2Onb_1" index="1" speed="13.89" length="144.51" shape="505.92,1368.37 495.85,1224.21"/>
     </edge>
-    <edge id="A12MergeSouth1" from="gneJ29" to="gneJ13" priority="-1">
-        <lane id="A12MergeSouth1_0" index="0" speed="13.89" length="78.95" shape="464.93,1217.74 486.50,1141.80"/>
-        <lane id="A12MergeSouth1_1" index="1" speed="13.89" length="78.95" shape="461.85,1216.87 483.42,1140.92"/>
+    <edge id="A12MergeSouth2a" from="gneJ29" to="gneJ13" priority="-1">
+        <lane id="A12MergeSouth2a_0" index="0" speed="13.89" length="78.95" shape="464.93,1217.74 486.50,1141.80"/>
+        <lane id="A12MergeSouth2a_1" index="1" speed="13.89" length="78.95" shape="461.85,1216.87 483.42,1140.92"/>
     </edge>
-    <edge id="A12MergeSouth2" from="2140472412" to="gneJ29" priority="-1">
-        <lane id="A12MergeSouth2_0" index="0" speed="13.89" length="99.94" shape="437.62,1313.88 464.93,1217.74"/>
-        <lane id="A12MergeSouth2_1" index="1" speed="13.89" length="99.94" shape="434.54,1313.01 461.85,1216.87"/>
+    <edge id="A12MergeSouth2b" from="2140472412" to="gneJ29" priority="-1">
+        <lane id="A12MergeSouth2b_0" index="0" speed="13.89" length="99.94" shape="437.62,1313.88 464.93,1217.74"/>
+        <lane id="A12MergeSouth2b_1" index="1" speed="13.89" length="99.94" shape="434.54,1313.01 461.85,1216.87"/>
     </edge>
     <edge id="A12NorthIn" from="440803267" to="gneJ30" name="Blackwall Tunnel Northern Approach" priority="11" type="highway.trunk" spreadType="center">
         <lane id="A12NorthIn_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="69.18" shape="321.13,1769.03 348.96,1705.69">
@@ -608,6 +589,14 @@
             <param key="origId" value="34619265"/>
         </lane>
     </edge>
+    <edge id="A12OffMiddle" from="440394724" to="440396065" priority="10" type="highway.trunk_link" spreadType="center">
+        <lane id="A12OffMiddle_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="35.23" shape="315.82,1413.32 341.46,1389.16">
+            <param key="origId" value="204037392"/>
+        </lane>
+        <lane id="A12OffMiddle_1" index="1" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="35.23" shape="313.62,1410.99 339.27,1386.83">
+            <param key="origId" value="204037392"/>
+        </lane>
+    </edge>
     <edge id="A12OffRoad1" from="440403197" to="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" name="Brunswick Road" priority="10" type="highway.trunk_link" spreadType="center" shape="402.83,1493.27 429.48,1394.79 430.98,1390.40">
         <lane id="A12OffRoad1_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="105.00" shape="404.77,1492.21 431.01,1395.26 432.51,1390.86">
             <param key="origId" value="37576655"/>
@@ -632,14 +621,6 @@
             <param key="origId" value="204040189"/>
         </lane>
     </edge>
-    <edge id="A12OffRoadA13" from="440394724" to="440396065" priority="10" type="highway.trunk_link" spreadType="center">
-        <lane id="A12OffRoadA13_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="35.23" shape="315.82,1413.32 341.46,1389.16">
-            <param key="origId" value="204037392"/>
-        </lane>
-        <lane id="A12OffRoadA13_1" index="1" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="35.23" shape="313.62,1410.99 339.27,1386.83">
-            <param key="origId" value="204037392"/>
-        </lane>
-    </edge>
     <edge id="A12RoadWest" from="cluster_107489_107503_2140546941_4053161802_440827599_5344182303_5344182305" to="gneJ26" name="East India Dock Road" priority="11" type="highway.trunk" spreadType="center" shape="214.46,1333.69 304.00,1360.64">
         <lane id="A12RoadWest_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="72.69" shape="224.30,1341.66 293.90,1362.61">
             <param key="origId" value="235744952"/>
@@ -661,6 +642,18 @@
         <lane id="A12SouthIn_1" index="1" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="90.07" shape="433.26,957.25 430.73,971.60 429.44,985.52 429.96,999.46 432.28,1013.20 436.37,1026.54 442.18,1039.33 444.15,1043.55">
             <param key="origId" value="5026614 103856629 204332895 444580884"/>
         </lane>
+    </edge>
+    <edge id="A12SouthMerge1" from="2142198200" to="440398340" name="Blackwall Tunnel Northern Approach" priority="11" type="highway.trunk" spreadType="center" shape="369.29,1535.84 369.22,1518.80 369.28,1494.46 370.01,1476.63">
+        <lane id="A12SouthMerge1_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="46.98" shape="370.89,1535.72 370.82,1518.80 370.88,1494.49 371.11,1488.81">
+            <param key="origId" value="204040187"/>
+        </lane>
+        <lane id="A12SouthMerge1_1" index="1" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="46.98" shape="367.69,1535.73 367.62,1518.80 367.68,1494.43 367.92,1488.68">
+            <param key="origId" value="204040187"/>
+        </lane>
+    </edge>
+    <edge id="A12SouthMerge1On" from="gneJ21" to="440398340" priority="-1" shape="407.23,1425.08 400.39,1482.32 387.48,1504.91 375.65,1498.58 370.01,1476.63">
+        <lane id="A12SouthMerge1On_0" index="0" speed="13.89" length="76.73" shape="400.08,1444.45 395.74,1480.78 385.63,1498.48 379.77,1495.34 377.79,1487.64"/>
+        <lane id="A12SouthMerge1On_1" index="1" speed="13.89" length="76.73" shape="403.26,1444.83 398.84,1481.81 386.86,1502.77 377.02,1497.50 374.70,1488.44"/>
     </edge>
     <edge id="A12SouthOut" from="gneJ9" to="gneJ23" name="Blackwall Tunnel" priority="11" type="highway.trunk" spreadType="center" shape="500.37,1088.80 502.96,1084.03 551.88,993.19">
         <lane id="A12SouthOut_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="80.56" shape="515.09,1064.88 553.29,993.95">
@@ -699,6 +692,22 @@
         <lane id="A13RoadIn_2" index="2" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="50.53" shape="500.43,1378.90 450.80,1369.29">
             <param key="origId" value="197262682"/>
         </lane>
+    </edge>
+    <edge id="MiddleJunction1" from="440396065" to="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" name="East India Dock Road" priority="11" type="highway.trunk" spreadType="center" shape="350.62,1378.34 391.88,1383.07">
+        <lane id="MiddleJunction1_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="42.11" shape="352.24,1381.75 394.27,1386.56">
+            <param key="origId" value="204039616"/>
+        </lane>
+        <lane id="MiddleJunction1_1" index="1" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="42.11" shape="352.60,1378.57 394.44,1383.36">
+            <param key="origId" value="204039616"/>
+        </lane>
+        <lane id="MiddleJunction1_2" index="2" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="42.11" shape="352.96,1375.39 394.62,1380.16">
+            <param key="origId" value="204039616"/>
+        </lane>
+    </edge>
+    <edge id="MiddleJunction2" from="gneJ26" to="440396065" priority="-1">
+        <lane id="MiddleJunction2_0" index="0" speed="13.89" length="34.31" shape="306.28,1370.06 338.35,1382.24"/>
+        <lane id="MiddleJunction2_1" index="1" speed="13.89" length="34.31" shape="307.42,1367.07 339.49,1379.25"/>
+        <lane id="MiddleJunction2_2" index="2" speed="13.89" length="34.31" shape="308.55,1364.08 340.63,1376.26"/>
     </edge>
     <edge id="NewIn" from="262374840" to="5344200991" name="East India Dock Road" priority="11" type="highway.trunk">
         <lane id="NewIn_0" index="0" disallow="tram rail_urban rail rail_electric bicycle pedestrian ship" speed="13.41" length="28.55" shape="76.63,1320.90 104.83,1325.38">
@@ -752,10 +761,6 @@
             <param key="origId" value="37607638"/>
         </lane>
     </edge>
-    <edge id="gneE23" from="gneJ21" to="440398340" priority="-1" shape="407.23,1425.08 400.39,1482.32 387.48,1504.91 375.65,1498.58 370.01,1476.63">
-        <lane id="gneE23_0" index="0" speed="13.89" length="76.73" shape="400.08,1444.45 395.74,1480.78 385.63,1498.48 379.77,1495.34 377.79,1487.64"/>
-        <lane id="gneE23_1" index="1" speed="13.89" length="76.73" shape="403.26,1444.83 398.84,1481.81 386.86,1502.77 377.02,1497.50 374.70,1488.44"/>
-    </edge>
     <edge id="gneE27" from="gneJ15" to="gneJ26" priority="-1">
         <lane id="gneE27_0" index="0" speed="13.89" length="38.60" shape="346.62,1351.11 308.25,1355.34"/>
         <lane id="gneE27_1" index="1" speed="13.89" length="38.60" shape="346.97,1354.29 308.60,1358.52"/>
@@ -767,11 +772,6 @@
     <edge id="gneE32" from="gneJ15" to="440400209" priority="-1">
         <lane id="gneE32_0" index="0" speed="13.89" length="20.97" shape="349.00,1343.00 330.25,1333.60"/>
         <lane id="gneE32_1" index="1" speed="13.89" length="20.97" shape="347.56,1345.86 328.82,1336.46"/>
-    </edge>
-    <edge id="gneE33" from="gneJ26" to="440396065" priority="-1">
-        <lane id="gneE33_0" index="0" speed="13.89" length="34.31" shape="306.28,1370.06 338.35,1382.24"/>
-        <lane id="gneE33_1" index="1" speed="13.89" length="34.31" shape="307.42,1367.07 339.49,1379.25"/>
-        <lane id="gneE33_2" index="2" speed="13.89" length="34.31" shape="308.55,1364.08 340.63,1376.26"/>
     </edge>
     <edge id="gneE34" from="gneJ19" to="gneJ17" priority="-1">
         <lane id="gneE34_0" index="0" speed="13.89" length="106.39" shape="351.36,1594.76 326.22,1698.13"/>
@@ -890,7 +890,7 @@
         <request index="0" response="00" foes="00" cont="0"/>
         <request index="1" response="00" foes="00" cont="0"/>
     </junction>
-    <junction id="440396065" type="traffic_light" x="350.62" y="1378.34" incLanes="A12OffRoadA13_0 A12OffRoadA13_1 gneE33_0 gneE33_1 gneE33_2" intLanes=":440396065_0_0 :440396065_1_0 :440396065_2_0 :440396065_3_0 :440396065_3_1 :440396065_3_2" shape="353.15,1373.80 352.05,1383.34 350.18,1384.02 348.76,1384.98 347.01,1386.35 344.95,1388.13 342.56,1390.33 338.17,1385.67 338.73,1384.89 338.75,1384.55 338.60,1384.24 338.28,1383.97 337.79,1383.74 341.19,1374.76 343.61,1375.38 345.46,1375.31 347.04,1374.82 348.65,1374.22 350.58,1373.78">
+    <junction id="440396065" type="traffic_light" x="350.62" y="1378.34" incLanes="A12OffMiddle_0 A12OffMiddle_1 MiddleJunction2_0 MiddleJunction2_1 MiddleJunction2_2" intLanes=":440396065_0_0 :440396065_1_0 :440396065_2_0 :440396065_3_0 :440396065_3_1 :440396065_3_2" shape="353.15,1373.80 352.05,1383.34 350.18,1384.02 348.76,1384.98 347.01,1386.35 344.95,1388.13 342.56,1390.33 338.17,1385.67 338.73,1384.89 338.75,1384.55 338.60,1384.24 338.28,1383.97 337.79,1383.74 341.19,1374.76 343.61,1375.38 345.46,1375.31 347.04,1374.82 348.65,1374.22 350.58,1373.78">
         <request index="0" response="000000" foes="111000" cont="0"/>
         <request index="1" response="000000" foes="111000" cont="0"/>
         <request index="2" response="000000" foes="111000" cont="0"/>
@@ -898,7 +898,7 @@
         <request index="4" response="000111" foes="000111" cont="0"/>
         <request index="5" response="000111" foes="000111" cont="0"/>
     </junction>
-    <junction id="440398340" type="traffic_light" x="370.01" y="1476.63" incLanes="gneE23_0 gneE23_1 204040187#1_0 204040187#1_1" intLanes=":440398340_0_0 :440398340_0_1 :440398340_2_0 :440398340_2_1" shape="368.01,1465.13 374.38,1465.81 374.15,1470.45 374.54,1473.86 375.40,1476.63 376.58,1479.38 377.95,1482.71 379.34,1487.24 373.15,1488.83 372.71,1488.88 366.32,1488.62">
+    <junction id="440398340" type="traffic_light" x="370.01" y="1476.63" incLanes="A12SouthMerge1On_0 A12SouthMerge1On_1 A12SouthMerge1_0 A12SouthMerge1_1" intLanes=":440398340_0_0 :440398340_0_1 :440398340_2_0 :440398340_2_1" shape="368.01,1465.13 374.38,1465.81 374.15,1470.45 374.54,1473.86 375.40,1476.63 376.58,1479.38 377.95,1482.71 379.34,1487.24 373.15,1488.83 372.71,1488.88 366.32,1488.62">
         <request index="0" response="1100" foes="1100" cont="0"/>
         <request index="1" response="1100" foes="1100" cont="0"/>
         <request index="2" response="0000" foes="0011" cont="0"/>
@@ -961,7 +961,7 @@
         <request index="13" response="000000000000000" foes="000000111111110" cont="0"/>
         <request index="14" response="000000000000000" foes="000000111111110" cont="0"/>
     </junction>
-    <junction id="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" type="traffic_light" x="414.47" y="1376.39" incLanes="A13RoadIn_0 A13RoadIn_1 A13RoadIn_2 A12OffRoad1_0 A12OffRoad1_1 A12OffRoad2_0 A12OffRoad2_1 204039616_0 204039616_1 204039616_2" intLanes=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_0_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_0_1 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_0_2 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_0_3 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_4_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_5_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_6_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_7_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_8_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_9_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_10_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_11_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_12_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_12_1" shape="452.37,1361.45 449.15,1377.52 446.03,1377.36 443.16,1378.17 440.53,1379.96 438.14,1382.73 435.99,1386.47 434.09,1391.19 421.59,1388.56 412.01,1392.92 406.05,1395.24 405.07,1393.38 403.70,1391.79 401.92,1390.48 399.74,1389.44 397.16,1388.67 394.18,1388.16 396.27,1349.88 407.39,1350.88 416.45,1352.43 424.48,1354.39 432.46,1356.64 441.43,1359.04">
+    <junction id="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" type="traffic_light" x="414.47" y="1376.39" incLanes="A13RoadIn_0 A13RoadIn_1 A13RoadIn_2 A12OffRoad1_0 A12OffRoad1_1 A12OffRoad2_0 A12OffRoad2_1 MiddleJunction1_0 MiddleJunction1_1 MiddleJunction1_2" intLanes=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_0_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_0_1 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_0_2 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_0_3 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_4_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_5_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_6_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_7_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_8_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_9_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_10_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_11_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_12_0 :cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_12_1" shape="452.37,1361.45 449.15,1377.52 446.03,1377.36 443.16,1378.17 440.53,1379.96 438.14,1382.73 435.99,1386.47 434.09,1391.19 421.59,1388.56 412.01,1392.92 406.05,1395.24 405.07,1393.38 403.70,1391.79 401.92,1390.48 399.74,1389.44 397.16,1388.67 394.18,1388.16 396.27,1349.88 407.39,1350.88 416.45,1352.43 424.48,1354.39 432.46,1356.64 441.43,1359.04">
         <request index="0"  response="00000000000000" foes="00001111000000" cont="0"/>
         <request index="1"  response="00000000000000" foes="00001111000000" cont="0"/>
         <request index="2"  response="00000000000000" foes="00001111000000" cont="0"/>
@@ -989,7 +989,7 @@
         <request index="3" response="00000" foes="00000" cont="0"/>
         <request index="4" response="00000" foes="00000" cont="0"/>
     </junction>
-    <junction id="gneJ13" type="traffic_light" x="487.14" y="1121.97" incLanes="A12MergeOnSouth_0 A12MergeOnSouth_1 A12MergeSouth1_0 A12MergeSouth1_1" intLanes=":gneJ13_0_0 :gneJ13_0_1 :gneJ13_2_0 :gneJ13_2_1" shape="488.24,1119.22 494.18,1121.59 492.89,1125.66 492.55,1128.78 492.89,1131.46 493.59,1134.19 494.38,1137.49 494.94,1141.84 488.55,1142.29 488.04,1142.23 481.88,1140.48 483.12,1135.92 483.96,1132.52 484.65,1129.71 485.44,1126.94 486.55,1123.63">
+    <junction id="gneJ13" type="traffic_light" x="487.14" y="1121.97" incLanes="A12MergeSouth2Ona_0 A12MergeSouth2Ona_1 A12MergeSouth2a_0 A12MergeSouth2a_1" intLanes=":gneJ13_0_0 :gneJ13_0_1 :gneJ13_2_0 :gneJ13_2_1" shape="488.24,1119.22 494.18,1121.59 492.89,1125.66 492.55,1128.78 492.89,1131.46 493.59,1134.19 494.38,1137.49 494.94,1141.84 488.55,1142.29 488.04,1142.23 481.88,1140.48 483.12,1135.92 483.96,1132.52 484.65,1129.71 485.44,1126.94 486.55,1123.63">
         <request index="0" response="0000" foes="1100" cont="0"/>
         <request index="1" response="0000" foes="1100" cont="0"/>
         <request index="2" response="0011" foes="0011" cont="0"/>
@@ -1039,11 +1039,11 @@
         <request index="0" response="00" foes="00" cont="0"/>
         <request index="1" response="00" foes="00" cont="0"/>
     </junction>
-    <junction id="gneJ28" type="priority" x="494.24" y="1224.17" incLanes="A12MergeOnSouth2_0 A12MergeOnSouth2_1" intLanes=":gneJ28_0_0 :gneJ28_0_1" shape="500.63,1223.87 494.25,1224.32 494.23,1224.02 500.61,1223.58">
+    <junction id="gneJ28" type="priority" x="494.24" y="1224.17" incLanes="A12MergeSouth2Onb_0 A12MergeSouth2Onb_1" intLanes=":gneJ28_0_0 :gneJ28_0_1" shape="500.63,1223.87 494.25,1224.32 494.23,1224.02 500.61,1223.58">
         <request index="0" response="00" foes="00" cont="0"/>
         <request index="1" response="00" foes="00" cont="0"/>
     </junction>
-    <junction id="gneJ29" type="priority" x="460.31" y="1216.43" incLanes="A12MergeSouth2_0 A12MergeSouth2_1" intLanes=":gneJ29_0_0 :gneJ29_0_1" shape="460.31,1216.43 466.47,1218.18 460.31,1216.43">
+    <junction id="gneJ29" type="priority" x="460.31" y="1216.43" incLanes="A12MergeSouth2b_0 A12MergeSouth2b_1" intLanes=":gneJ29_0_0 :gneJ29_0_1" shape="460.31,1216.43 466.47,1218.18 460.31,1216.43">
         <request index="0" response="00" foes="00" cont="0"/>
         <request index="1" response="00" foes="00" cont="0"/>
     </junction>
@@ -1063,16 +1063,10 @@
     <connection from="-553673729" to="NewOut" fromLane="1" toLane="1" via=":5344200991_0_1" dir="s" state="M"/>
     <connection from="204036496" to="NewRoadEast" fromLane="0" toLane="0" via=":440400209_0_0" tl="440400209" linkIndex="0" dir="s" state="O"/>
     <connection from="204036496" to="NewRoadEast" fromLane="1" toLane="1" via=":440400209_0_1" tl="440400209" linkIndex="1" dir="s" state="O"/>
-    <connection from="204039616" to="37594519" fromLane="0" toLane="0" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_10_0" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="10" dir="l" state="O"/>
-    <connection from="204039616" to="37594519" fromLane="1" toLane="1" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_11_0" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="11" dir="l" state="O"/>
-    <connection from="204039616" to="204039621" fromLane="1" toLane="0" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_12_0" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="12" dir="s" state="O"/>
-    <connection from="204039616" to="204039621" fromLane="2" toLane="1" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_12_1" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="13" dir="s" state="O"/>
     <connection from="204039621" to="A13Out" fromLane="0" toLane="0" via=":440395986_0_0" dir="s" state="M"/>
     <connection from="204039621" to="A13Out" fromLane="1" toLane="1" via=":440395986_0_1" dir="s" state="M"/>
-    <connection from="204040187#0" to="204040187#1" fromLane="0" toLane="0" via=":2142198200_0_0" dir="s" state="M"/>
-    <connection from="204040187#0" to="204040187#1" fromLane="1" toLane="1" via=":2142198200_0_1" dir="s" state="M"/>
-    <connection from="204040187#1" to="204195630" fromLane="0" toLane="0" via=":440398340_2_0" tl="440398340" linkIndex="2" dir="s" state="O"/>
-    <connection from="204040187#1" to="204195630" fromLane="1" toLane="1" via=":440398340_2_1" tl="440398340" linkIndex="3" dir="s" state="O"/>
+    <connection from="204040187#0" to="A12SouthMerge1" fromLane="0" toLane="0" via=":2142198200_0_0" dir="s" state="M"/>
+    <connection from="204040187#0" to="A12SouthMerge1" fromLane="1" toLane="1" via=":2142198200_0_1" dir="s" state="M"/>
     <connection from="204195630" to="37576800" fromLane="0" toLane="0" via=":440399362_0_0" dir="s" state="M"/>
     <connection from="204195630" to="37576800" fromLane="1" toLane="1" via=":440399362_0_1" dir="s" state="M"/>
     <connection from="204332894#0" to="204332894#1" fromLane="0" toLane="0" via=":2014156889_0_0" dir="s" state="M"/>
@@ -1087,17 +1081,17 @@
     <connection from="235745292#1" to="gneE27" fromLane="3" toLane="1" via=":gneJ15_2_1" dir="s" state="M"/>
     <connection from="238640116" to="A12OffRoad3" fromLane="0" toLane="0" via=":2140514378_0_0" dir="s" state="M"/>
     <connection from="238640116" to="A12OffRoad3" fromLane="1" toLane="1" via=":2140514378_0_1" dir="s" state="M"/>
-    <connection from="24030319" to="A12OffRoadA13" fromLane="0" toLane="0" via=":440394724_0_0" dir="s" state="M"/>
-    <connection from="24030319" to="A12OffRoadA13" fromLane="0" toLane="1" via=":440394724_0_1" dir="s" state="M"/>
-    <connection from="33740900#2" to="A12MergeOnSouth2" fromLane="0" toLane="0" via=":cluster_2140465345_2140484926_440400188_0_0" dir="l" state="M"/>
-    <connection from="33740900#2" to="A12MergeOnSouth2" fromLane="0" toLane="1" via=":cluster_2140465345_2140484926_440400188_1_0" dir="l" state="M"/>
+    <connection from="24030319" to="A12OffMiddle" fromLane="0" toLane="0" via=":440394724_0_0" dir="s" state="M"/>
+    <connection from="24030319" to="A12OffMiddle" fromLane="0" toLane="1" via=":440394724_0_1" dir="s" state="M"/>
+    <connection from="33740900#2" to="A12MergeSouth2Onb" fromLane="0" toLane="0" via=":cluster_2140465345_2140484926_440400188_0_0" dir="l" state="M"/>
+    <connection from="33740900#2" to="A12MergeSouth2Onb" fromLane="0" toLane="1" via=":cluster_2140465345_2140484926_440400188_1_0" dir="l" state="M"/>
     <connection from="33740900#2" to="A13RoadIn" fromLane="0" toLane="0" via=":cluster_2140465345_2140484926_440400188_2_0" dir="s" state="M"/>
     <connection from="33740900#2" to="A13RoadIn" fromLane="1" toLane="1" via=":cluster_2140465345_2140484926_440400188_2_1" dir="s" state="M"/>
     <connection from="33740900#2" to="A13RoadIn" fromLane="2" toLane="2" via=":cluster_2140465345_2140484926_440400188_2_2" dir="s" state="M"/>
-    <connection from="37576800" to="A12MergeSouth2" fromLane="0" toLane="0" via=":2140472412_0_0" dir="s" state="M"/>
-    <connection from="37576800" to="A12MergeSouth2" fromLane="1" toLane="1" via=":2140472412_0_1" dir="s" state="M"/>
-    <connection from="37594519" to="gneE23" fromLane="0" toLane="0" via=":gneJ21_0_0" dir="s" state="M"/>
-    <connection from="37594519" to="gneE23" fromLane="1" toLane="1" via=":gneJ21_0_1" dir="s" state="M"/>
+    <connection from="37576800" to="A12MergeSouth2b" fromLane="0" toLane="0" via=":2140472412_0_0" dir="s" state="M"/>
+    <connection from="37576800" to="A12MergeSouth2b" fromLane="1" toLane="1" via=":2140472412_0_1" dir="s" state="M"/>
+    <connection from="37594519" to="A12SouthMerge1On" fromLane="0" toLane="0" via=":gneJ21_0_0" dir="s" state="M"/>
+    <connection from="37594519" to="A12SouthMerge1On" fromLane="1" toLane="1" via=":gneJ21_0_1" dir="s" state="M"/>
     <connection from="5026614.1317" to="204036496" fromLane="0" toLane="0" via=":2140482757_0_0" dir="s" state="M"/>
     <connection from="5026614.1317" to="204036496" fromLane="0" toLane="1" via=":2140482757_0_1" dir="s" state="M"/>
     <connection from="5026614.1317" to="204332894#0" fromLane="0" toLane="0" via=":2140482757_2_0" dir="s" state="M"/>
@@ -1116,14 +1110,14 @@
     <connection from="A12MergeOnNorth1" to="gneE34" fromLane="1" toLane="1" via=":gneJ19_1_0" tl="gneJ19" linkIndex="3" dir="l" state="O"/>
     <connection from="A12MergeOnNorth2" to="A12MergeOnNorth1" fromLane="0" toLane="0" via=":gneJ20_0_0" dir="s" state="M"/>
     <connection from="A12MergeOnNorth2" to="A12MergeOnNorth1" fromLane="1" toLane="1" via=":gneJ20_0_1" dir="s" state="M"/>
-    <connection from="A12MergeOnSouth" to="gneE8.37" fromLane="0" toLane="0" via=":gneJ13_0_0" tl="gneJ13" linkIndex="0" dir="s" state="O"/>
-    <connection from="A12MergeOnSouth" to="gneE8.37" fromLane="1" toLane="1" via=":gneJ13_0_1" tl="gneJ13" linkIndex="1" dir="s" state="O"/>
-    <connection from="A12MergeOnSouth2" to="A12MergeOnSouth" fromLane="0" toLane="0" via=":gneJ28_0_0" dir="s" state="M"/>
-    <connection from="A12MergeOnSouth2" to="A12MergeOnSouth" fromLane="1" toLane="1" via=":gneJ28_0_1" dir="s" state="M"/>
-    <connection from="A12MergeSouth1" to="gneE8.37" fromLane="0" toLane="0" via=":gneJ13_2_0" tl="gneJ13" linkIndex="2" dir="s" state="o"/>
-    <connection from="A12MergeSouth1" to="gneE8.37" fromLane="1" toLane="1" via=":gneJ13_2_1" tl="gneJ13" linkIndex="3" dir="s" state="o"/>
-    <connection from="A12MergeSouth2" to="A12MergeSouth1" fromLane="0" toLane="0" via=":gneJ29_0_0" dir="s" state="M"/>
-    <connection from="A12MergeSouth2" to="A12MergeSouth1" fromLane="1" toLane="1" via=":gneJ29_0_1" dir="s" state="M"/>
+    <connection from="A12MergeSouth2Ona" to="gneE8.37" fromLane="0" toLane="0" via=":gneJ13_0_0" tl="gneJ13" linkIndex="0" dir="s" state="O"/>
+    <connection from="A12MergeSouth2Ona" to="gneE8.37" fromLane="1" toLane="1" via=":gneJ13_0_1" tl="gneJ13" linkIndex="1" dir="s" state="O"/>
+    <connection from="A12MergeSouth2Onb" to="A12MergeSouth2Ona" fromLane="0" toLane="0" via=":gneJ28_0_0" dir="s" state="M"/>
+    <connection from="A12MergeSouth2Onb" to="A12MergeSouth2Ona" fromLane="1" toLane="1" via=":gneJ28_0_1" dir="s" state="M"/>
+    <connection from="A12MergeSouth2a" to="gneE8.37" fromLane="0" toLane="0" via=":gneJ13_2_0" tl="gneJ13" linkIndex="2" dir="s" state="o"/>
+    <connection from="A12MergeSouth2a" to="gneE8.37" fromLane="1" toLane="1" via=":gneJ13_2_1" tl="gneJ13" linkIndex="3" dir="s" state="o"/>
+    <connection from="A12MergeSouth2b" to="A12MergeSouth2a" fromLane="0" toLane="0" via=":gneJ29_0_0" dir="s" state="M"/>
+    <connection from="A12MergeSouth2b" to="A12MergeSouth2a" fromLane="1" toLane="1" via=":gneJ29_0_1" dir="s" state="M"/>
     <connection from="A12NorthIn" to="A12NorthIn.81" fromLane="0" toLane="0" via=":gneJ30_0_0" dir="s" state="M"/>
     <connection from="A12NorthIn" to="A12NorthIn.81" fromLane="1" toLane="1" via=":gneJ30_0_1" dir="s" state="M"/>
     <connection from="A12NorthIn" to="A12NorthIn.81" fromLane="2" toLane="2" via=":gneJ30_0_2" dir="s" state="M"/>
@@ -1131,6 +1125,9 @@
     <connection from="A12NorthIn.81" to="5027151" fromLane="1" toLane="1" via=":11060852_1_0" dir="L" state="M"/>
     <connection from="A12NorthIn.81" to="204040187#0" fromLane="1" toLane="0" via=":11060852_2_0" dir="s" state="M"/>
     <connection from="A12NorthIn.81" to="204040187#0" fromLane="2" toLane="1" via=":11060852_2_1" dir="s" state="M"/>
+    <connection from="A12OffMiddle" to="MiddleJunction1" fromLane="0" toLane="0" via=":440396065_0_0" tl="440396065" linkIndex="0" dir="l" state="O"/>
+    <connection from="A12OffMiddle" to="MiddleJunction1" fromLane="0" toLane="1" via=":440396065_1_0" tl="440396065" linkIndex="1" dir="l" state="O"/>
+    <connection from="A12OffMiddle" to="MiddleJunction1" fromLane="1" toLane="2" via=":440396065_2_0" tl="440396065" linkIndex="2" dir="l" state="O"/>
     <connection from="A12OffRoad1" to="204039621" fromLane="0" toLane="0" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_4_0" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="4" dir="l" state="o"/>
     <connection from="A12OffRoad1" to="204039621" fromLane="1" toLane="1" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_5_0" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="5" dir="l" state="o"/>
     <connection from="A12OffRoad2" to="235745292#1" fromLane="0" toLane="0" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_6_0" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="6" dir="R" state="o"/>
@@ -1141,16 +1138,17 @@
     <connection from="A12OffRoad3" to="A12OffRoad1" fromLane="0" toLane="1" via=":440403197_0_1" dir="s" state="M"/>
     <connection from="A12OffRoad3" to="A12OffRoad2" fromLane="0" toLane="0" via=":440403197_2_0" dir="s" state="M"/>
     <connection from="A12OffRoad3" to="A12OffRoad2" fromLane="1" toLane="1" via=":440403197_2_1" dir="s" state="M"/>
-    <connection from="A12OffRoadA13" to="204039616" fromLane="0" toLane="0" via=":440396065_0_0" tl="440396065" linkIndex="0" dir="l" state="O"/>
-    <connection from="A12OffRoadA13" to="204039616" fromLane="0" toLane="1" via=":440396065_1_0" tl="440396065" linkIndex="1" dir="l" state="O"/>
-    <connection from="A12OffRoadA13" to="204039616" fromLane="1" toLane="2" via=":440396065_2_0" tl="440396065" linkIndex="2" dir="l" state="O"/>
     <connection from="A12RoadWest" to="A12MergeOnNorth2" fromLane="0" toLane="0" via=":gneJ26_2_0" tl="gneJ26" linkIndex="2" dir="l" state="O"/>
     <connection from="A12RoadWest" to="A12MergeOnNorth2" fromLane="1" toLane="1" via=":gneJ26_3_0" tl="gneJ26" linkIndex="3" dir="l" state="O"/>
-    <connection from="A12RoadWest" to="gneE33" fromLane="1" toLane="0" via=":gneJ26_4_0" tl="gneJ26" linkIndex="4" dir="s" state="O"/>
-    <connection from="A12RoadWest" to="gneE33" fromLane="2" toLane="1" via=":gneJ26_4_1" tl="gneJ26" linkIndex="5" dir="s" state="O"/>
-    <connection from="A12RoadWest" to="gneE33" fromLane="3" toLane="2" via=":gneJ26_4_2" tl="gneJ26" linkIndex="6" dir="s" state="O"/>
+    <connection from="A12RoadWest" to="MiddleJunction2" fromLane="1" toLane="0" via=":gneJ26_4_0" tl="gneJ26" linkIndex="4" dir="s" state="O"/>
+    <connection from="A12RoadWest" to="MiddleJunction2" fromLane="2" toLane="1" via=":gneJ26_4_1" tl="gneJ26" linkIndex="5" dir="s" state="O"/>
+    <connection from="A12RoadWest" to="MiddleJunction2" fromLane="3" toLane="2" via=":gneJ26_4_2" tl="gneJ26" linkIndex="6" dir="s" state="O"/>
     <connection from="A12SouthIn" to="5026614.1317" fromLane="0" toLane="0" via=":gneJ22_0_0" dir="s" state="M"/>
     <connection from="A12SouthIn" to="5026614.1317" fromLane="1" toLane="1" via=":gneJ22_0_1" dir="s" state="M"/>
+    <connection from="A12SouthMerge1" to="204195630" fromLane="0" toLane="0" via=":440398340_2_0" tl="440398340" linkIndex="2" dir="s" state="O"/>
+    <connection from="A12SouthMerge1" to="204195630" fromLane="1" toLane="1" via=":440398340_2_1" tl="440398340" linkIndex="3" dir="s" state="O"/>
+    <connection from="A12SouthMerge1On" to="204195630" fromLane="0" toLane="0" via=":440398340_0_0" tl="440398340" linkIndex="0" dir="s" state="o"/>
+    <connection from="A12SouthMerge1On" to="204195630" fromLane="1" toLane="1" via=":440398340_0_1" tl="440398340" linkIndex="1" dir="s" state="o"/>
     <connection from="A13In" to="33740900#2" fromLane="0" toLane="0" via=":cluster_2070861921_2070861924_0_0" dir="s" state="M"/>
     <connection from="A13In" to="33740900#2" fromLane="1" toLane="1" via=":cluster_2070861921_2070861924_0_1" dir="s" state="M"/>
     <connection from="A13In" to="33740900#2" fromLane="2" toLane="2" via=":cluster_2070861921_2070861924_0_2" dir="s" state="M"/>
@@ -1158,6 +1156,13 @@
     <connection from="A13RoadIn" to="235745292#1" fromLane="1" toLane="1" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_0_1" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="1" dir="s" state="O"/>
     <connection from="A13RoadIn" to="235745292#1" fromLane="2" toLane="2" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_0_2" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="2" dir="s" state="O"/>
     <connection from="A13RoadIn" to="235745292#1" fromLane="2" toLane="3" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_0_3" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="3" dir="s" state="O"/>
+    <connection from="MiddleJunction1" to="37594519" fromLane="0" toLane="0" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_10_0" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="10" dir="l" state="O"/>
+    <connection from="MiddleJunction1" to="37594519" fromLane="1" toLane="1" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_11_0" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="11" dir="l" state="O"/>
+    <connection from="MiddleJunction1" to="204039621" fromLane="1" toLane="0" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_12_0" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="12" dir="s" state="O"/>
+    <connection from="MiddleJunction1" to="204039621" fromLane="2" toLane="1" via=":cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431_12_1" tl="cluster_2026643264_2140465349_2140510370_2140510374_2140805075_4089151443_440396074_440398915_440398917_440403474_4525051431" linkIndex="13" dir="s" state="O"/>
+    <connection from="MiddleJunction2" to="MiddleJunction1" fromLane="0" toLane="0" via=":440396065_3_0" tl="440396065" linkIndex="3" dir="s" state="o"/>
+    <connection from="MiddleJunction2" to="MiddleJunction1" fromLane="1" toLane="1" via=":440396065_3_1" tl="440396065" linkIndex="4" dir="s" state="o"/>
+    <connection from="MiddleJunction2" to="MiddleJunction1" fromLane="2" toLane="2" via=":440396065_3_2" tl="440396065" linkIndex="5" dir="s" state="o"/>
     <connection from="NewIn" to="NewRoadIn" fromLane="0" toLane="0" via=":5344200991_2_0" dir="s" state="M"/>
     <connection from="NewIn" to="NewRoadIn" fromLane="1" toLane="1" via=":5344200991_2_1" dir="s" state="M"/>
     <connection from="NewRoadEast" to="553671686#0" fromLane="0" toLane="0" via=":cluster_107489_107503_2140546941_4053161802_440827599_5344182303_5344182305_5_0" tl="cluster_107489_107503_2140546941_4053161802_440827599_5344182303_5344182305" linkIndex="5" dir="l" state="o"/>
@@ -1177,8 +1182,6 @@
     <connection from="RoundRoadIn" to="A12RoadWest" fromLane="0" toLane="1" via=":cluster_107489_107503_2140546941_4053161802_440827599_5344182303_5344182305_2_0" tl="cluster_107489_107503_2140546941_4053161802_440827599_5344182303_5344182305" linkIndex="2" dir="r" state="o"/>
     <connection from="RoundRoadIn" to="A12RoadWest" fromLane="1" toLane="2" via=":cluster_107489_107503_2140546941_4053161802_440827599_5344182303_5344182305_3_0" tl="cluster_107489_107503_2140546941_4053161802_440827599_5344182303_5344182305" linkIndex="3" dir="r" state="o"/>
     <connection from="RoundRoadIn" to="A12RoadWest" fromLane="1" toLane="3" via=":cluster_107489_107503_2140546941_4053161802_440827599_5344182303_5344182305_4_0" tl="cluster_107489_107503_2140546941_4053161802_440827599_5344182303_5344182305" linkIndex="4" dir="r" state="o"/>
-    <connection from="gneE23" to="204195630" fromLane="0" toLane="0" via=":440398340_0_0" tl="440398340" linkIndex="0" dir="s" state="o"/>
-    <connection from="gneE23" to="204195630" fromLane="1" toLane="1" via=":440398340_0_1" tl="440398340" linkIndex="1" dir="s" state="o"/>
     <connection from="gneE27" to="A12MergeOnNorth2" fromLane="0" toLane="0" via=":gneJ26_0_0" tl="gneJ26" linkIndex="0" dir="R" state="o"/>
     <connection from="gneE27" to="A12MergeOnNorth2" fromLane="1" toLane="1" via=":gneJ26_1_0" tl="gneJ26" linkIndex="1" dir="R" state="o"/>
     <connection from="gneE30" to="24030319" fromLane="0" toLane="0" via=":11130382_0_0" dir="L" state="M"/>
@@ -1186,9 +1189,6 @@
     <connection from="gneE30" to="A12MergeNorth2" fromLane="1" toLane="1" via=":11130382_1_1" dir="s" state="M"/>
     <connection from="gneE32" to="NewRoadEast" fromLane="0" toLane="0" via=":440400209_2_0" tl="440400209" linkIndex="2" dir="s" state="o"/>
     <connection from="gneE32" to="NewRoadEast" fromLane="1" toLane="1" via=":440400209_2_1" tl="440400209" linkIndex="3" dir="s" state="o"/>
-    <connection from="gneE33" to="204039616" fromLane="0" toLane="0" via=":440396065_3_0" tl="440396065" linkIndex="3" dir="s" state="o"/>
-    <connection from="gneE33" to="204039616" fromLane="1" toLane="1" via=":440396065_3_1" tl="440396065" linkIndex="4" dir="s" state="o"/>
-    <connection from="gneE33" to="204039616" fromLane="2" toLane="2" via=":440396065_3_2" tl="440396065" linkIndex="5" dir="s" state="o"/>
     <connection from="gneE34" to="A12NorthOut" fromLane="0" toLane="0" via=":gneJ17_0_0" dir="s" state="M"/>
     <connection from="gneE34" to="A12NorthOut" fromLane="1" toLane="1" via=":gneJ17_0_1" dir="s" state="M"/>
     <connection from="gneE34" to="A12NorthOut" fromLane="2" toLane="2" via=":gneJ17_0_2" dir="s" state="M"/>
@@ -1204,32 +1204,32 @@
     <connection from=":11130382_1" to="A12MergeNorth2" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":2014156889_0" to="204332894#1" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":2014156889_0" to="204332894#1" fromLane="1" toLane="1" dir="s" state="M"/>
-    <connection from=":2140472412_0" to="A12MergeSouth2" fromLane="0" toLane="0" dir="s" state="M"/>
-    <connection from=":2140472412_0" to="A12MergeSouth2" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":2140472412_0" to="A12MergeSouth2b" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":2140472412_0" to="A12MergeSouth2b" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":2140482757_0" to="204036496" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":2140482757_0" to="204036496" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":2140482757_2" to="204332894#0" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":2140482757_2" to="204332894#0" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":2140514378_0" to="A12OffRoad3" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":2140514378_0" to="A12OffRoad3" fromLane="1" toLane="1" dir="s" state="M"/>
-    <connection from=":2142198200_0" to="204040187#1" fromLane="0" toLane="0" dir="s" state="M"/>
-    <connection from=":2142198200_0" to="204040187#1" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":2142198200_0" to="A12SouthMerge1" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":2142198200_0" to="A12SouthMerge1" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":2464441436_0" to="238640116" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":2464441436_0" to="238640116" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":262374856_0" to="235744905#2" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":262374856_0" to="235744905#2" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":262374856_2" to="RoundOut" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":262374856_2" to="RoundOut" fromLane="1" toLane="1" dir="s" state="M"/>
-    <connection from=":440394724_0" to="A12OffRoadA13" fromLane="0" toLane="0" dir="s" state="M"/>
-    <connection from=":440394724_0" to="A12OffRoadA13" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":440394724_0" to="A12OffMiddle" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":440394724_0" to="A12OffMiddle" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":440395986_0" to="A13Out" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":440395986_0" to="A13Out" fromLane="1" toLane="1" dir="s" state="M"/>
-    <connection from=":440396065_0" to="204039616" fromLane="0" toLane="0" dir="l" state="M"/>
-    <connection from=":440396065_1" to="204039616" fromLane="0" toLane="1" dir="l" state="M"/>
-    <connection from=":440396065_2" to="204039616" fromLane="0" toLane="2" dir="l" state="M"/>
-    <connection from=":440396065_3" to="204039616" fromLane="0" toLane="0" dir="s" state="M"/>
-    <connection from=":440396065_3" to="204039616" fromLane="1" toLane="1" dir="s" state="M"/>
-    <connection from=":440396065_3" to="204039616" fromLane="2" toLane="2" dir="s" state="M"/>
+    <connection from=":440396065_0" to="MiddleJunction1" fromLane="0" toLane="0" dir="l" state="M"/>
+    <connection from=":440396065_1" to="MiddleJunction1" fromLane="0" toLane="1" dir="l" state="M"/>
+    <connection from=":440396065_2" to="MiddleJunction1" fromLane="0" toLane="2" dir="l" state="M"/>
+    <connection from=":440396065_3" to="MiddleJunction1" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":440396065_3" to="MiddleJunction1" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":440396065_3" to="MiddleJunction1" fromLane="2" toLane="2" dir="s" state="M"/>
     <connection from=":440398340_0" to="204195630" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":440398340_0" to="204195630" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":440398340_2" to="204195630" fromLane="0" toLane="0" dir="s" state="M"/>
@@ -1288,8 +1288,8 @@
     <connection from=":cluster_2070861921_2070861924_0" to="33740900#2" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":cluster_2070861921_2070861924_0" to="33740900#2" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":cluster_2070861921_2070861924_0" to="33740900#2" fromLane="2" toLane="2" dir="s" state="M"/>
-    <connection from=":cluster_2140465345_2140484926_440400188_0" to="A12MergeOnSouth2" fromLane="0" toLane="0" dir="l" state="M"/>
-    <connection from=":cluster_2140465345_2140484926_440400188_1" to="A12MergeOnSouth2" fromLane="0" toLane="1" dir="l" state="M"/>
+    <connection from=":cluster_2140465345_2140484926_440400188_0" to="A12MergeSouth2Onb" fromLane="0" toLane="0" dir="l" state="M"/>
+    <connection from=":cluster_2140465345_2140484926_440400188_1" to="A12MergeSouth2Onb" fromLane="0" toLane="1" dir="l" state="M"/>
     <connection from=":cluster_2140465345_2140484926_440400188_2" to="A13RoadIn" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":cluster_2140465345_2140484926_440400188_2" to="A13RoadIn" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":cluster_2140465345_2140484926_440400188_2" to="A13RoadIn" fromLane="2" toLane="2" dir="s" state="M"/>
@@ -1310,23 +1310,23 @@
     <connection from=":gneJ19_2" to="gneE34" fromLane="1" toLane="2" dir="s" state="M"/>
     <connection from=":gneJ20_0" to="A12MergeOnNorth1" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":gneJ20_0" to="A12MergeOnNorth1" fromLane="1" toLane="1" dir="s" state="M"/>
-    <connection from=":gneJ21_0" to="gneE23" fromLane="0" toLane="0" dir="s" state="M"/>
-    <connection from=":gneJ21_0" to="gneE23" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":gneJ21_0" to="A12SouthMerge1On" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":gneJ21_0" to="A12SouthMerge1On" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":gneJ22_0" to="5026614.1317" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":gneJ22_0" to="5026614.1317" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":gneJ26_0" to="A12MergeOnNorth2" fromLane="0" toLane="0" dir="R" state="M"/>
     <connection from=":gneJ26_1" to="A12MergeOnNorth2" fromLane="0" toLane="1" dir="R" state="M"/>
     <connection from=":gneJ26_2" to="A12MergeOnNorth2" fromLane="0" toLane="0" dir="l" state="M"/>
     <connection from=":gneJ26_3" to="A12MergeOnNorth2" fromLane="0" toLane="1" dir="l" state="M"/>
-    <connection from=":gneJ26_4" to="gneE33" fromLane="0" toLane="0" dir="s" state="M"/>
-    <connection from=":gneJ26_4" to="gneE33" fromLane="1" toLane="1" dir="s" state="M"/>
-    <connection from=":gneJ26_4" to="gneE33" fromLane="2" toLane="2" dir="s" state="M"/>
+    <connection from=":gneJ26_4" to="MiddleJunction2" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":gneJ26_4" to="MiddleJunction2" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":gneJ26_4" to="MiddleJunction2" fromLane="2" toLane="2" dir="s" state="M"/>
     <connection from=":gneJ27_0" to="A12MergeNorth1" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":gneJ27_0" to="A12MergeNorth1" fromLane="1" toLane="1" dir="s" state="M"/>
-    <connection from=":gneJ28_0" to="A12MergeOnSouth" fromLane="0" toLane="0" dir="s" state="M"/>
-    <connection from=":gneJ28_0" to="A12MergeOnSouth" fromLane="1" toLane="1" dir="s" state="M"/>
-    <connection from=":gneJ29_0" to="A12MergeSouth1" fromLane="0" toLane="0" dir="s" state="M"/>
-    <connection from=":gneJ29_0" to="A12MergeSouth1" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":gneJ28_0" to="A12MergeSouth2Ona" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":gneJ28_0" to="A12MergeSouth2Ona" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":gneJ29_0" to="A12MergeSouth2a" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":gneJ29_0" to="A12MergeSouth2a" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":gneJ30_0" to="A12NorthIn.81" fromLane="0" toLane="0" dir="s" state="M"/>
     <connection from=":gneJ30_0" to="A12NorthIn.81" fromLane="1" toLane="1" dir="s" state="M"/>
     <connection from=":gneJ30_0" to="A12NorthIn.81" fromLane="2" toLane="2" dir="s" state="M"/>

@@ -2,7 +2,6 @@ import logging
 import traci
 import random
 
-
 class Platoon():
 
     def __init__(self, startingVehicles):
@@ -14,6 +13,7 @@ class Platoon():
         self._color = (random.randint(0, 255), random.randint(
             0, 255), random.randint(0, 255))
         self._currentSpeed = self.getLeadVehicle().getSpeed()
+        self._disbandReason = None
         self._eligibleForMerging = False
         self._lane = self.getLeadVehicle().getLane()
         self._lanePosition = self.getLeadVehicle().getLanePosition()
@@ -53,7 +53,7 @@ class Platoon():
 
     def disband(self):
         """Marks a platoon as dead and returns vehicles to normal"""
-        self.stopBehvaviour()
+        self.stopBehaviour()
         self._active = False
         logging.info("Disbanding platoon: %s", self.getID())
 
@@ -125,6 +125,7 @@ class Platoon():
         """Merges the given platoon into the current platoon"""
         if self.checkVehiclePathsConverge(platoon.getAllVehicles()) and platoon.getLane() == self.getLane():
             platoon.disband()
+            platoon._disbandReason = "Merged"
             for vehicle in platoon.getAllVehicles():
                 self.addVehicle(vehicle)
         self._eligibleForMerging = False
@@ -177,27 +178,27 @@ class Platoon():
                 v.setColor(self._color)
                 v.setImperfection(0)
                 v.setMinGap(0)
-                v.setSpeedFactor(1)
                 v.setTau(0.05)
             self.update()
 
-    def stopBehvaviour(self):
+    def stopBehaviour(self):
         """Stops vehicles exhibiting platoon behaviour, if they are
         still present within the map"""
         for v in self._vehicles:
             if v.isActive():
                 v.setColor((255, 255, 255))
                 v.setImperfection(0.5)
-                #v.setMinGap(0)
-                v.setSpeed(-1)
-                v.setSpeedFactor(0.9)
+                v.setMinGap(2.5)
                 v.setTau(1)
+                # Take speed back to default behaviour
+                v.setSpeed(-1)
 
     def updateIsActive(self):
         """
         Is Active Update, if not disband
         """
         if not all([v.isActive() for v in self._vehicles]):
+            self._disbandReason = "One vehicle not active"
             self.disband()
             return True
 
@@ -216,6 +217,7 @@ class Platoon():
             potentialNewLeader = self.getLeadVehicle().getLeader()
             if potentialNewLeader and potentialNewLeader[0] in self.getAllVehiclesByName():
                 # Something has gone wrong disband the platoon
+                self._disbandReason = "Reform required due to new leader"
                 self.disband()
 
             # Location Info Update
@@ -239,6 +241,7 @@ class Platoon():
             # next edge, otherwise disband the platoon
             if not self._currentSpeed == 0:
                 if not self.checkVehiclePathsConverge(self.getAllVehicles()):
+                    self._disbandReason = "Platoon paths now diverge"
                     self.disband()            
 
     def _updateSpeed(self, speed, inclLeadingVeh=True):

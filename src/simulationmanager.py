@@ -31,6 +31,16 @@ class SimulationManager():
         # Gets all vehicles in every active platoon
         return flatten(p.getAllVehiclesByName() for p in self.getActivePlatoons())
 
+    def getAverageLengthOfAllPlatoons(self):
+        count = 0
+        length = len(self.platoons)
+        for platoon in self.platoons:
+            if platoon._disbandReason != "Merged" and platoon._disbandReason != "Reform required due to new leader":
+                count = count + platoon.getNumberOfVehicles()
+            else:
+                length = length - 1
+        return count/length
+
     def getPlatoonByLane(self, lane):
         # Gets platoons corresponding to a given lane
         return [p for p in self.getActivePlatoons() if lane == p.getLane()]
@@ -45,8 +55,6 @@ class SimulationManager():
         leadVeh = vehicle.getLeader()
         if leadVeh and leadVeh[1] < 10:
             possiblePlatoon = self.getPlatoonByVehicle(leadVeh[0])
-            assert(len(possiblePlatoon) <= 1,
-                   "Only 1 platoon should be returned")
             if possiblePlatoon:
                 if possiblePlatoon[0].checkVehiclePathsConverge([vehicle]) and vehicle not in possiblePlatoon[0].getAllVehicles():
                     return possiblePlatoon[0]
