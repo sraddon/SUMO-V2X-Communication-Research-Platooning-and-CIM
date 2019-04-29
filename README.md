@@ -1,11 +1,12 @@
 # SUMO V2X Communication Research (Platooning and CIM)
-This project was initially started in 2019 while performing research into V2X communication 
-coupled with Autonomous Vehicles as a part of my dissertation for a degree at the University of Bath.
+This project was initially started in 2019 while performing research into [V2X communication](https://en.wikipedia.org/wiki/Vehicle-to-everything) 
+coupled with [Autonomous Vehicles](https://en.wikipedia.org/wiki/Self-driving_car) as a part of my dissertation for a degree at the University of Bath.
 
-The project focuses on creating platoons and controlling them using intersection through Centralised Intersection Management. 
+The project focuses on creating platoons and controlling them using intersection through [Centralised Intersection Management](https://spectrum.ieee.org/cars-that-think/transportation/self-driving/the-scary-efficiency-of-autonomous-intersections). 
 This has been implemented using a combination of SUMO and TraCI (python).
 
 SUMO is a urban traffic simulator and more information can be found about it [ here ](https://sumo.dlr.de/wiki/Simulation_of_Urban_MObility_-_Wiki)
+
 TraCI is a way of manually viewing information about a SUMO simulation and changing how it behaves while it is running using python (more information [here](https://sumo.dlr.de/wiki/TraCI))
 
 Feel free to build/learn off this and if you have any questions, let me know.
