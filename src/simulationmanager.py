@@ -1,7 +1,7 @@
-from src.intersectionController import IntersectionController
-from src.platoon import Platoon
-from src.vehicle import Vehicle
-from src.simlib import flatten
+from intersectionController import IntersectionController
+from platoon import Platoon
+from vehicle import Vehicle
+from simlib import flatten
 
 import traci
 
@@ -32,14 +32,15 @@ class SimulationManager():
         return flatten(p.getAllVehiclesByName() for p in self.getActivePlatoons())
 
     def getAverageLengthOfAllPlatoons(self):
-        count = 0
-        length = len(self.platoons)
-        for platoon in self.platoons:
-            if platoon._disbandReason != "Merged" and platoon._disbandReason != "Reform required due to new leader":
-                count = count + platoon.getNumberOfVehicles()
-            else:
-                length = length - 1
-        return count/length
+        if self.platoons:
+            count = 0
+            length = len(self.platoons)
+            for platoon in self.platoons:
+                if platoon._disbandReason != "Merged" and platoon._disbandReason != "Reform required due to new leader":
+                    count = count + platoon.getNumberOfVehicles()
+                else:
+                    length = length - 1
+            return count/length
 
     def getPlatoonByLane(self, lane):
         # Gets platoons corresponding to a given lane

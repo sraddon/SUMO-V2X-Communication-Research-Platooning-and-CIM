@@ -1,6 +1,6 @@
 import traci
 import logging
-from src.simlib import flatten
+from simlib import flatten
 
 class IntersectionController():
 
