@@ -17,8 +17,9 @@ To start using the project it is relatively simple
 1. Install [Python](https://www.python.org/), make sure you tick the box to add python to your system path during installation
 2. Install [SUMO](https://sumo.dlr.de/wiki/Installing), make sure you tick the box to add SUMO to your system path during installation
 3. Clone this repository into a local area.
-4. Run any of the scenarios from the scenarios folder either by double clicking them or using the command prompt (ex. python Launch-Intersection-Scenario-1.py)
-5. Explore the code base! I've tried to make it quite well documented within the code and I'd recommend reading in this order: scenario file ----> simulation manager ---> vehicle ---> platoon ---> intersection controller
+4. Run the scenario_runner.py file either by double clicking it or using the command prompt (ex. python scenario_runner.py)
+5. It will then give you the options of the scenarios you can run, input your choice and the simulation will start automatically (You can also pass directly from the cmd if you want to bypass the clunky python input code)
+6. Explore the code base! I've tried to make it quite well documented within the code and I'd recommend reading in this order: scenario manager ----> simulation manager ---> vehicle ---> platoon ---> intersection controller
 
 Any Python compatible IDE can be used to edit the project, I used Visual Studio but there are plenty others!
 More information about the different scenarios and how they work are below.
@@ -26,8 +27,7 @@ More information about the different scenarios and how they work are below.
 ## Folder Structure
  - Maps: this contains all the maps used in each scenarios, each map has a traffic light version for platooning scenarios and a non-traffic light version for the CIM scenarios. This also contains route information determining how may vehicles spawn in each scenario.
  - output: this is where any outputs from running the simulation will be saved, it only contains a file which determines which data is generated within this repository.
- - scenarios: this is where the Python files which execute the different scenarios reside
- - src: this is where the Python code which deals with platoons, CIM, vehicles and the simulation resides. This code is run to determine how vehicles in each scenario behave.
+ - src: this is where the Python code which deals with platoons, CIM, vehicles and the simulation resides. This code is run to determine how vehicles in each scenario behave. It also contains the configurations for each different scenario and the main code to execute them.
 
 ## Scenarios
  - Scenario 1: the control - nothing added just normal SUMO running
@@ -52,3 +52,7 @@ More information about the different scenarios and how they work are below.
  deactivates any vehicles that leave it. It also calls the update functions of every platoon so that they can update their statuses and speed. 
 
  - vehicle: contains getters and setters for a traci vehicle
+
+ - scenario_manager: contains the configuration data for each different scenario. It uses this to run whichever scenario is requested by the user
+
+ - scenario_runner: acts as a nice entry point for the user, handles getting the right input and then executing the scenario manager properly

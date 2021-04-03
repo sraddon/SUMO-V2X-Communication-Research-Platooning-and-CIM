@@ -8,6 +8,8 @@ from collections import namedtuple
 scenarioNumberConfigTuple = namedtuple("scenarioNumberConfig", "nameModifier enableManager enablePlatoons enableCoordination enableZipping")
 scenarioMapConfigTuple = namedtuple("scenarioMapConfig", "mapName defaultTrafficScale")
 
+DEFAULT_OUTPUT_SAVE_LOCATION = "output/additional.xml"
+
 SCENARIO_NUMBER_CONFIGS = {
     1 : scenarioNumberConfigTuple("",        False, False, False, False),
     2 : scenarioNumberConfigTuple("",        True, True, False, False),
@@ -35,9 +37,14 @@ def runScenario(mapName, scenarioNum, numOfSteps=5000):
     baseScenarioName = scenarioLocationConfig.mapName
     logging.info("Got map name %s and number config %s", baseScenarioName, "|".join([" %s: %s " % (key, value) for key, value in scenarioNumberConfig._asdict().items()]))
     mapName = baseScenarioName + scenarioNumberConfig.nameModifier
-    mapLocation = "maps/{0}/{0}.sumocfg".format(mapName)
 
-    setUpSimulation(mapLocation, scenarioLocationConfig.defaultTrafficScale)
+    # Get location of config files and place to store the output
+    currPath = __file__.replace("\\", "/")
+    mainProjectDirectory = "/".join(currPath.split("/")[:currPath.split("/").index("src")])
+    mapLocation = "{0}/maps/{1}/{1}.sumocfg".format(mainProjectDirectory, mapName)
+    outputFileLocation = "{0}/{1}".format(mainProjectDirectory, DEFAULT_OUTPUT_SAVE_LOCATION)
+
+    setUpSimulation(mapLocation, scenarioLocationConfig.defaultTrafficScale, outputFileLocation)
     step = 0
     manager = SimulationManager(scenarioNumberConfig.enablePlatoons, scenarioNumberConfig.enableCoordination, scenarioNumberConfig.enableZipping) if scenarioNumberConfig.enableManager else None
     while step < numOfSteps:

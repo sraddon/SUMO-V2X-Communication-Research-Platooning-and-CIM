@@ -6,7 +6,7 @@ def flatten(l):
     # A basic function to flatten a list
     return [item for sublist in l for item in sublist]
 
-def setUpSimulation(configFile, trafficScale = 1):
+def setUpSimulation(configFile, trafficScale = 1, outputFileLocation="output/additional.xml"):
     # Check SUMO has been set up properly
     sumoBinary = checkBinary("sumo-gui")
 
@@ -17,4 +17,4 @@ def setUpSimulation(configFile, trafficScale = 1):
 
     # Start Simulation and step through
     traci.start([sumoBinary, "-c", configFile, "--step-length", "0.1", "--collision.action", "none", "--start",
-                 "--additional-files", "output/additional.xml", "--duration-log.statistics", "--scale", str(trafficScale)])
+                 "--additional-files", outputFileLocation, "--duration-log.statistics", "--scale", str(trafficScale)])
