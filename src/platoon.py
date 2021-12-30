@@ -4,7 +4,7 @@ import random
 
 class Platoon():
 
-    def __init__(self, startingVehicles):
+    def __init__(self, startingVehicles, maxVehicles=0):
         """Create a platoon, setting default values for all variables"""
         logging.info("Creating a new platoon with: %s", startingVehicles)
         self._vehicles = list(startingVehicles)
@@ -19,6 +19,7 @@ class Platoon():
         self._lanePosition = self.getLeadVehicle().getLanePosition()
         self._controlledLanes = set()
         self._targetSpeed = -1
+        self._maxVehicles = maxVehicles
 
         self.getLeadVehicle().setColor(self._color)
         self.startBehaviour(startingVehicles[1:])
@@ -29,10 +30,19 @@ class Platoon():
 
     def addVehicle(self, vehicle):
         """Adds a single vehicle to this platoon"""
+        if self._maxVehicles and len(self._vehicles) + 1 > self._maxVehicles:
+            raise ValueError("Cannot add a new vehicle to the platoon, we've exceeded the maximum allowed")
         self._vehicles.append(vehicle)
         self.startBehaviour([vehicle, ])
         logging.info("Adding %s to platoon %s, New length: %s",
                      vehicle.getName(), self.getID(), len(self._vehicles))
+
+    def canAddVehicles(self, vehicles):
+        """ Determines if we can add the given vehicles to this platoon.
+        """
+        if self._maxVehicles and len(self._vehicles) + len(vehicles) > self._maxVehicles:
+            return False
+        return True
 
     def canMerge(self):
         """

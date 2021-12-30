@@ -7,12 +7,13 @@ import traci
 
 class SimulationManager():
 
-    def __init__(self, pCreation=True, iCoordination=True, iZipping=True):
+    def __init__(self, pCreation=True, iCoordination=True, iZipping=True, maxVehiclesPerPlatoon=0):
         self.intersections = []
         self.platoons = list()
         self.platoonCreation = pCreation
         self.vehicles = list()
         self.maxStoppedVehicles = dict()
+        self.maxVehiclesPerPlatoon = maxVehiclesPerPlatoon
         if iCoordination:
             for intersection in traci.trafficlights.getIDList():
                 controller = IntersectionController(intersection, iZipping)
@@ -20,7 +21,7 @@ class SimulationManager():
 
     def createPlatoon(self, vehicles):
         # Creates a platoon with the given vehicles
-        platoon = Platoon(vehicles)
+        platoon = Platoon(vehicles, maxVehicles=self.maxVehiclesPerPlatoon)
         self.platoons.append(platoon)
 
     def getActivePlatoons(self):
@@ -57,7 +58,7 @@ class SimulationManager():
         if leadVeh and leadVeh[1] < 10:
             possiblePlatoon = self.getPlatoonByVehicle(leadVeh[0])
             if possiblePlatoon:
-                if possiblePlatoon[0].checkVehiclePathsConverge([vehicle]) and vehicle not in possiblePlatoon[0].getAllVehicles():
+                if possiblePlatoon[0].checkVehiclePathsConverge([vehicle]) and vehicle not in possiblePlatoon[0].getAllVehicles() and possiblePlatoon[0].canAddVehicles([vehicle]):
                     return possiblePlatoon[0]
 
     def handleSimulationStep(self):
@@ -120,5 +121,5 @@ class SimulationManager():
                     lead = platoon.getLeadVehicle().getLeader()
                     if lead:
                         leadPlatoon = self.getPlatoonByVehicle(lead[0])
-                        if leadPlatoon:
+                        if leadPlatoon and leadPlatoon[0].canAddVehicles(platoon._vehicles):
                             leadPlatoon[0].mergePlatoon(platoon)

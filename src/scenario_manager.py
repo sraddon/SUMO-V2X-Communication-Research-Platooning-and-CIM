@@ -5,16 +5,18 @@ from simlib import setUpSimulation
 
 from collections import namedtuple
 
-scenarioNumberConfigTuple = namedtuple("scenarioNumberConfig", "nameModifier enableManager enablePlatoons enableCoordination enableZipping")
+scenarioNumberConfigTuple = namedtuple("scenarioNumberConfig", "nameModifier enableManager enablePlatoons enableCoordination enableZipping maxVehiclesPerPlatoon")
 scenarioMapConfigTuple = namedtuple("scenarioMapConfig", "mapName defaultTrafficScale")
 
 DEFAULT_OUTPUT_SAVE_LOCATION = "output/additional.xml"
 
 SCENARIO_NUMBER_CONFIGS = {
-    1 : scenarioNumberConfigTuple("",        False, False, False, False),
-    2 : scenarioNumberConfigTuple("",        True, True, False, False),
-    3 : scenarioNumberConfigTuple("_no_TLS", True, True, True, False),
-    4 : scenarioNumberConfigTuple("_no_TLS", True, True, True, True),
+    1 : scenarioNumberConfigTuple("",        False, False, False, False, 0),
+    2 : scenarioNumberConfigTuple("",        True, True, False, False, 0),
+    3 : scenarioNumberConfigTuple("_no_TLS", True, True, True, False, 0),
+    4 : scenarioNumberConfigTuple("_no_TLS", True, True, True, True, 0),
+    # Extra scenarios
+    5 : scenarioNumberConfigTuple("",        True, True, False, False, 5), # Limit platoon size
 }
 SCENARIO_LOCATION_CONFIG = {
     "Blackwell"    : scenarioMapConfigTuple("BlackwellTunnelNorthApproach", 1),
@@ -46,7 +48,7 @@ def runScenario(mapName, scenarioNum, numOfSteps=5000):
 
     setUpSimulation(mapLocation, scenarioLocationConfig.defaultTrafficScale, outputFileLocation)
     step = 0
-    manager = SimulationManager(scenarioNumberConfig.enablePlatoons, scenarioNumberConfig.enableCoordination, scenarioNumberConfig.enableZipping) if scenarioNumberConfig.enableManager else None
+    manager = SimulationManager(scenarioNumberConfig.enablePlatoons, scenarioNumberConfig.enableCoordination, scenarioNumberConfig.enableZipping, scenarioNumberConfig.maxVehiclesPerPlatoon) if scenarioNumberConfig.enableManager else None
     while step < numOfSteps:
         if manager:
             manager.handleSimulationStep()
