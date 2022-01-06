@@ -5,7 +5,7 @@ from simlib import flatten
 class IntersectionController():
 
     def __init__(self, intersection, zip=True):
-        lanes = traci.trafficlights.getControlledLanes(intersection)
+        lanes = traci.trafficlight.getControlledLanes(intersection)
         self.lanesServed = set(lanes)
         self.name = intersection
         self.platoons = []

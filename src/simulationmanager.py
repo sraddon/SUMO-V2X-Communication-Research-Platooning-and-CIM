@@ -15,7 +15,7 @@ class SimulationManager():
         self.maxStoppedVehicles = dict()
         self.maxVehiclesPerPlatoon = maxVehiclesPerPlatoon
         if iCoordination:
-            for intersection in traci.trafficlights.getIDList():
+            for intersection in traci.trafficlight.getIDList():
                 controller = IntersectionController(intersection, iZipping)
                 self.intersections.append(controller)
 
